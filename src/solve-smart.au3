@@ -1,4 +1,4 @@
-;~ v0.1.0 by Sven Seyfert (SOLVE-SMART)
+;~ v0.2.0 by Sven Seyfert (SOLVE-SMART)
 
 #AutoIt3Wrapper_AU3Check_Parameters=-d -w 1 -w 2 -w 3 -w 4 -w 5 -w 6 -w 7
 #AutoIt3Wrapper_AU3Check_Stop_OnWarning=y
@@ -28,7 +28,7 @@ Func _DemoStringDataToTable()
     If @error Then
         _ShowError()
     EndIf
-    $sOut &= '==> Border style 3:' & @CRLF & $sResult
+    $sOut &= StringFormat('==> Border style 3:\n\n%s', $sResult)
 
     _ShowResult($sOut)
 EndFunc
@@ -50,37 +50,46 @@ Func _DemoArrayDataToTable()
     If @error Then
         _ShowError()
     EndIf
-    $sOut &= '==> Border style 0:' & @CRLF & $sResult
+    $sOut &= StringFormat('==> Border style: "0=NoBorder"\n\n%s', $sResult)
 
     $sResult = _DataToTable($aData, 1, @TAB, 'L, R, C, L')
     If @error Then
         _ShowError()
     EndIf
-    $sOut &= '==> Border style 1:' & @CRLF & $sResult
+    $sOut &= StringFormat('\n==> Border style: "1=HeaderNoBorder"\n\n%s', $sResult)
 
     $sResult = _DataToTable($aData, 2, @TAB, 'L, R, C, L')
     If @error Then
         _ShowError()
     EndIf
-    $sOut &= '==> Border style 2:' & @CRLF & $sResult
+    $sOut &= StringFormat('\n==> Border style: "2=BorderNoHeader"\n\n%s', $sResult)
 
     $sResult = _DataToTable($aData, 3, @TAB, 'L, R, C, L')
     If @error Then
         _ShowError()
     EndIf
-    $sOut &= '==> Border style 3:' & @CRLF & $sResult
+    $sOut &= StringFormat('\n==> Border style: "3=BorderAndHeader"\n\n%s', $sResult)
+
+    $sResult = _DataToTable($aData, 4, @TAB, 'L, R, C, L')
+    If @error Then
+        _ShowError()
+    EndIf
+    $sOut &= StringFormat('\n==> Border style: "4=BorderAndHeaderEdgesWithAccent"\n\n%s', $sResult)
+
+    ; other tests
+    $sOut &= StringFormat('\n%s\n\nother tests:\n', _StringRepeat('-', 80))
 
     $sResult = _DataToTable($aData, 'bla', @TAB, 'L, R, C, L')
     If @error Then
         _ShowError()
     EndIf
-    $sOut &= '==> With invalid border style (back to default):' & @CRLF & $sResult
+    $sOut &= StringFormat('\n==> With invalid border style (back to default):\n\n%s', $sResult)
 
     $sResult = _DataToTable($aData, 1, ',', 'L, R, C, L')
     If @error Then
         _ShowError()
     EndIf
-    $sOut &= '==> With different separator (loose data because comma separated):' & @CRLF & $sResult
+    $sOut &= StringFormat('\n==> With "," as separator (loose data because comma separated content):\n\n%s', $sResult)
 
     _ShowResult($sOut)
 EndFunc
