@@ -6,6 +6,8 @@ https://www.autoitscript.com/forum/topic/212876-_stringtotable/
 > All credits for the original logic go to ioa747 who made the UDF<br>
 > with ❤️ for readable and elegant output.
 
+<br>
+
 ## StringToTable.au3 v0.3.1 (by ioa747)
 
     ; ====================================================================================================
@@ -15,8 +17,9 @@ https://www.autoitscript.com/forum/topic/212876-_stringtotable/
     ; Note............: Testet in Win10 22H2
     ; ====================================================================================================
 
+<br>
 
-## DataToTable.au3 v0.4.0 (by Sven Seyfert (SOLVE-SMART))
+## DataToTable.au3 v0.1.0 (by Sven Seyfert (SOLVE-SMART))
 
     ; ====================================================================================================
     ; Title...........: DataToTable UDF
@@ -36,6 +39,8 @@ https://www.autoitscript.com/forum/topic/212876-_stringtotable/
 
 - add markdown table format
 - add gherkin feature table format
+
+<br>
 
 ## License
 
