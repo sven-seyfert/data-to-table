@@ -17,6 +17,8 @@ https://www.autoitscript.com/forum/topic/212876-_stringtotable/
     ; Note............: Testet in Win10 22H2
     ; ====================================================================================================
 
+The `src/ioa747.au3` file includes the StringToTable UDF (`#include "..\lib\StringToTable.au3"`).
+
 <br>
 
 ## DataToTable.au3 v0.1.0 (by Sven Seyfert (SOLVE-SMART))
@@ -27,6 +29,8 @@ https://www.autoitscript.com/forum/topic/212876-_stringtotable/
     ; AutoIt Version..: 3.3.16.1   Author: Sven Seyfert (SOLVE-SMART)   Script Version: v0.1.0
     ; Note............: Testet in Win10 22H2
     ; ====================================================================================================
+
+The `src/solve-smart.au3` file includes the StringToTable UDF (`#include "..\lib\DataToTable.au3"`).
 
 ### Rewrite and enhancement
 
