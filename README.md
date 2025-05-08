@@ -32,7 +32,7 @@ The `src/ioa747.au3` file includes the StringToTable UDF (`#include "..\lib\Stri
     ; Note............: Testet in Win10 22H2
     ; ====================================================================================================
 
-The `src/solve-smart.au3` file includes the StringToTable UDF (`#include "..\lib\DataToTable.au3"`).
+The `src/solve-smart.au3` file includes the DataToTable UDF (`#include "..\lib\DataToTable.au3"`).
 
 ### Rewrite and enhancement
 
