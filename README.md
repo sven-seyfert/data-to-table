@@ -43,8 +43,9 @@ The `src/solve-smart.au3` file includes the StringToTable UDF (`#include "..\lib
 
 ### New ideas (upcoming features)
 
-- add markdown table format
-- add gherkin feature table format
+- [ ] add markdown table format
+- [ ] add gherkin feature table format
+- [ ] check for other table related formats
 
 <br>
 
