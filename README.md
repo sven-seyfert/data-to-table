@@ -51,10 +51,36 @@ The `src/solve-smart.au3` file includes the DataToTable UDF (`#include "..\lib\D
 
 ## Result of the example input data
 
-### Console output
+### Input as string
+
+``` autoit
+Local Const $sData = _
+    'Language	Popularity (%)	Job Demand	Typical Use' & @CRLF & _
+    'JavaScript	62.3	Very High	Web Development, Frontend/Backend' & @CRLF & _
+    'C#	27.1	High	Game Development, Windows Apps, Web Dev' & @CRLF & _
+    'Go	13.8	Growing	Cloud Services, System Programming' & @CRLF & _
+    'PowerShell	13.5	Low to Moderate	Task Automation, DevOps, System Admin' & @CRLF & _
+    'AutoIt	0.5	Low	Windows GUI Automation, Scripting'
+```
+
+### Input as array
+
+``` autoit
+Local Const $aData[][5] = _
+    [ _
+        ['Language',    'Popularity (%)', 'Job Demand',      'Typical Use'                             ], _
+        ['JavaScript',  '62.3',           'Very High',       'Web Development, Frontend/Backend'       ], _
+        ['C#',          '27.1',           'High',            'Game Development, Windows Apps, Web Dev' ], _
+        ['Go',          '13.8',           'Growing',         'Cloud Services, System Programming'      ], _
+        ['PowerShell',  '13.5',           'Low to Moderate', 'Task Automation, DevOps, System Admin'   ], _
+        ['AutoIt',      '0.5',            'Low',             'Windows GUI Automation, Scripting'       ] _
+    ]
+```
+
+### Output on console
 
 It's not very obvious what are the differences between the variants are.<br>
-So it's better to see the next section [Output as file or GUI](#output-as-file-or-gui).
+So it's better to see the next section [Output in file or GUI](#output-in-file-or-gui).
 
 ==> Border style: "0=NoBorder"
 
@@ -110,7 +136,7 @@ So it's better to see the next section [Output as file or GUI](#output-as-file-o
     ¦ AutoIt     ¦            0.5 ¦       Low       ¦ Windows GUI Automation, Scripting       ¦
     +-----------------------------------------------------------------------------------------+
 
-### Output as file or GUI
+### Output in file or GUI
 
 ![output-result](./assets/images/output-result.jpg)
 
