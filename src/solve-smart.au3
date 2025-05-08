@@ -4,7 +4,6 @@
 #AutoIt3Wrapper_AU3Check_Stop_OnWarning=y
 
 #include-once
-#include <Array.au3>
 #include "../lib/DataToTable.au3"
 
 _Main()

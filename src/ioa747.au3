@@ -3,6 +3,7 @@
 #AutoIt3Wrapper_AU3Check_Parameters=-d -w 1 -w 2 -w 3 -w 4 -w 5 -w 6 -w 7
 #AutoIt3Wrapper_AU3Check_Stop_OnWarning=y
 
+#include-once
 #include "..\lib\StringToTable.au3"
 
 Example1() ; Example string to table
