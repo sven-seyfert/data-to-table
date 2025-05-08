@@ -1,4 +1,4 @@
-;~ v0.1.0 by Sven Seyfert (SOLVE-SMART)
+;~ v0.2.0 by Sven Seyfert (SOLVE-SMART)
 
 #include-once
 #include <Array.au3>
@@ -13,7 +13,12 @@ Global $mFrame[]
 ; Description....: Converts a string or array to a formatted table with alignment and border options.
 ; Syntax.........: _DataToTable( $vData [, $iBorderStyle = 3 [, $sSeparator = @TAB [, $sColumnAlign = '']]] )
 ; Parameters.....: $vData        - The input string or array containing data values.
-;                  $iBorderStyle - [optional] Border style (0=NoBorder, 1=BorderNoHeader, 2=HeaderNoBorder, 3=BorderAndHeader) (Default is 3)
+;                  $iBorderStyle - [optional] Border style (Default is 3)
+;                                      0=NoBorder
+;                                      1=HeaderNoBorder
+;                                      2=BorderNoHeader
+;                                      3=BorderAndHeader
+;                                      4=BorderAndHeaderEdgesWithAccent
 ;                  $sSeparator   - [optional] Separator used in the input string. (Default is @TAB)
 ;                  $sColumnAlign - [optional] Alignment options for each column (e.g. 'L,R,C'). (Default is '' (left-aligned))
 ; Return values..: Success - The formatted table as a string.
@@ -37,9 +42,9 @@ Global $mFrame[]
 ;                  ConsoleWrite(_DataToTable($aData, 3, @TAB, 'L, R, C, L'))
 ; ===============================================================================================================================
 Func _DataToTable($vData, $iBorderStyle = 3, $sSeparator = @TAB, $sColumnAlign = '')
+    __ConfigureParameters($iBorderStyle, $sSeparator, $sColumnAlign)
     __InitConstants()
     __InitFrameCharacters()
-    __ConfigureParameters($iBorderStyle, $sSeparator, $sColumnAlign)
 
     Local Const $sData = __ExtractRawData($vData)
     If @error Then
@@ -76,8 +81,8 @@ Func _DataToTable($vData, $iBorderStyle = 3, $sSeparator = @TAB, $sColumnAlign =
 
     ; build result
     Local $sResult, $sInterimResult
-    Local Const $bHeader = ($mParam.BorderStyle = 2 Or $mParam.BorderStyle = 3)
-    Local Const $bBorder = ($mParam.BorderStyle = 1 Or $mParam.BorderStyle = 3)
+    Local Const $bHeader = ($mParam.BorderStyle = 1 Or $mParam.BorderStyle = 3 Or $mParam.BorderStyle = 4)
+    Local Const $bBorder = ($mParam.BorderStyle = 2 Or $mParam.BorderStyle = 3 Or $mParam.BorderStyle = 4)
     Local Const $sPrefix = ($mParam.BorderStyle = 0) ? '' : $mConst.Whitespace
 
     If $bBorder Then
@@ -128,10 +133,10 @@ Func __InitConstants()
 EndFunc
 
 Func __InitFrameCharacters()
-    $mFrame.TopLeft     = '┌'
-    $mFrame.TopRight    = '┐'
-    $mFrame.BottomLeft  = '└'
-    $mFrame.BottomRight = '┘'
+    $mFrame.TopLeft     = ($mParam.BorderStyle = 4) ? '╔' : '┌'
+    $mFrame.TopRight    = ($mParam.BorderStyle = 4) ? '╗' : '┐'
+    $mFrame.BottomLeft  = ($mParam.BorderStyle = 4) ? '╚' : '└'
+    $mFrame.BottomRight = ($mParam.BorderStyle = 4) ? '╝' : '┘'
     $mFrame.Horizontal  = '─'
     $mFrame.Vertical    = '│'
     $mFrame.Center      = '┼'
@@ -146,7 +151,7 @@ Func __ConfigureParameters($iBorderStyle, $sSeparator, $sColumnAlign)
     $mParam.Separator   = $sSeparator
     $mParam.ColumnAlign = StringUpper($sColumnAlign)
 
-    If $mParam.BorderStyle < 0 Or $mParam.BorderStyle > 3 Or Not IsInt($mParam.BorderStyle) Then
+    If $mParam.BorderStyle < 0 Or $mParam.BorderStyle > 4 Or Not IsInt($mParam.BorderStyle) Then
         $mParam.BorderStyle = 3
     EndIf
 
@@ -294,7 +299,7 @@ Func __RenderHeaderRow($bBorder, $iCols, $sPrefix, $aTable, $aColWidths, $aAlign
     Local $sString
 
     ; border left
-    If $bBorder Or $mParam.BorderStyle = 2 Then
+    If $bBorder Or $mParam.BorderStyle = 1 Then
         $sString &= $mFrame.Vertical
     EndIf
 
@@ -308,12 +313,12 @@ Func __RenderHeaderRow($bBorder, $iCols, $sPrefix, $aTable, $aColWidths, $aAlign
 
         $sString &= $sPrefix & $sCell
         If $i < $iCols - 1 Then
-            $sString &= ($bBorder Or $mParam.BorderStyle = 2) ? $mFrame.Vertical : ''
+            $sString &= ($bBorder Or $mParam.BorderStyle = 1) ? $mFrame.Vertical : ''
         EndIf
     Next
 
     ; border right
-    If $bBorder Or $mParam.BorderStyle = 2 Then
+    If $bBorder Or $mParam.BorderStyle = 1 Then
         $sString &= $mFrame.Vertical
     EndIf
 
@@ -323,8 +328,8 @@ Func __RenderHeaderRow($bBorder, $iCols, $sPrefix, $aTable, $aColWidths, $aAlign
     If $bBorder Then
         $sString &= $mFrame.LeftHead
     EndIf
-    If $mParam.BorderStyle = 2 Then
-        $sString &= $mFrame.Vertical
+    If $mParam.BorderStyle = 1 Then
+        $sString &= $mFrame.LeftHead
     EndIf
 
     Local $sEnhancedString
@@ -341,7 +346,7 @@ Func __RenderHeaderRow($bBorder, $iCols, $sPrefix, $aTable, $aColWidths, $aAlign
             Case $i < $iCols - 1 And $bBorder
                 $sString &= $mFrame.Center
 
-            Case $i < $iCols - 1 And $mParam.BorderStyle = 2
+            Case $i < $iCols - 1 And $mParam.BorderStyle = 1
                 $sString &= $mFrame.Center
 
             Case $i >= $iCols - 1 And $bBorder
@@ -350,8 +355,8 @@ Func __RenderHeaderRow($bBorder, $iCols, $sPrefix, $aTable, $aColWidths, $aAlign
 
     Next
 
-    If $mParam.BorderStyle = 2 Then
-        $sString &= $mFrame.Vertical
+    If $mParam.BorderStyle = 1 Then
+        $sString &= $mFrame.RightHead
     EndIf
 
     $sString &= $mConst.Delimiter
@@ -365,7 +370,7 @@ Func __RenderDataRows($bHeader, $aTable, $bBorder, $iCols, $sPrefix, $aColWidths
     Local $sCell
 
     For $i = $iStart To UBound($aTable) - 1
-        If $bBorder Or $mParam.BorderStyle = 2 Then
+        If $bBorder Or $mParam.BorderStyle = 1 Then
             $sString &= $mFrame.Vertical
         EndIf
 
@@ -378,12 +383,12 @@ Func __RenderDataRows($bHeader, $aTable, $bBorder, $iCols, $sPrefix, $aColWidths
 
             $sString &= $sPrefix & $sCell
 
-            If $j < $iCols - 1 And ($bBorder Or $mParam.BorderStyle = 2) Then
+            If $j < $iCols - 1 And ($bBorder Or $mParam.BorderStyle = 1) Then
                 $sString &= $mFrame.Vertical
             EndIf
         Next
 
-        If $bBorder Or $mParam.BorderStyle = 2 Then
+        If $bBorder Or $mParam.BorderStyle = 1 Then
             $sString &= $mFrame.Vertical
         EndIf
 
