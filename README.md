@@ -3,6 +3,8 @@
 This repository is a rewrite and enhancement of the nice AutoIt UDF "StringToTable.au3 by "ioa747".<br>
 https://www.autoitscript.com/forum/topic/212876-_stringtotable/
 
+Please check out the [upcoming features](#new-ideas-upcoming-features) section.
+
 > All credits for the original logic go to ioa747 who made the UDF<br>
 > with ❤️ for readable and elegant output.
 
