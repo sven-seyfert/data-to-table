@@ -23,12 +23,12 @@ The `src/ioa747.au3` file includes the StringToTable UDF (`#include "..\lib\Stri
 
 <br>
 
-## DataToTable.au3 v0.1.0 (by Sven Seyfert (SOLVE-SMART))
+## DataToTable.au3 v0.2.0 (by Sven Seyfert (SOLVE-SMART))
 
     ; ====================================================================================================
     ; Title...........: DataToTable UDF
     ; Description.....: Converts a string or array to a formatted table with alignment and border options.
-    ; AutoIt Version..: 3.3.16.1   Author: Sven Seyfert (SOLVE-SMART)   Script Version: v0.1.0
+    ; AutoIt Version..: 3.3.16.1   Author: Sven Seyfert (SOLVE-SMART)   Script Version: v0.2.0
     ; Note............: Testet in Win10 22H2
     ; ====================================================================================================
 
@@ -53,7 +53,10 @@ The `src/solve-smart.au3` file includes the DataToTable UDF (`#include "..\lib\D
 
 ### Console output
 
-==> Border style 0:
+It's not very obvious what are the differences between the variants are.<br>
+So it's better to see the next section [Output as file or GUI](#output-as-file-or-gui).
+
+==> Border style: "0=NoBorder"
 
     Language   Popularity (%)   Job Demand    Typical Use
     JavaScript           62.3    Very High    Web Development, Frontend/Backend
@@ -62,7 +65,17 @@ The `src/solve-smart.au3` file includes the DataToTable UDF (`#include "..\lib\D
     PowerShell           13.5 Low to Moderate Task Automation, DevOps, System Admin
     AutoIt                0.5       Low       Windows GUI Automation, Scripting
 
-==> Border style 1:
+==> Border style: "1=HeaderNoBorder"
+
+    ¦ Language   ¦ Popularity (%) ¦   Job Demand    ¦ Typical Use                             ¦
+    +------------+----------------+-----------------+-----------------------------------------¦
+    ¦ JavaScript ¦           62.3 ¦    Very High    ¦ Web Development, Frontend/Backend       ¦
+    ¦ C#         ¦           27.1 ¦      High       ¦ Game Development, Windows Apps, Web Dev ¦
+    ¦ Go         ¦           13.8 ¦     Growing     ¦ Cloud Services, System Programming      ¦
+    ¦ PowerShell ¦           13.5 ¦ Low to Moderate ¦ Task Automation, DevOps, System Admin   ¦
+    ¦ AutoIt     ¦            0.5 ¦       Low       ¦ Windows GUI Automation, Scripting       ¦
+
+==> Border style: "2=BorderNoHeader"
 
     +-----------------------------------------------------------------------------------------+
     ¦ Language   ¦ Popularity (%) ¦   Job Demand    ¦ Typical Use                             ¦
@@ -73,17 +86,7 @@ The `src/solve-smart.au3` file includes the DataToTable UDF (`#include "..\lib\D
     ¦ AutoIt     ¦            0.5 ¦       Low       ¦ Windows GUI Automation, Scripting       ¦
     +-----------------------------------------------------------------------------------------+
 
-==> Border style 2:
-
-    ¦ Language   ¦ Popularity (%) ¦   Job Demand    ¦ Typical Use                             ¦
-    ¦------------+----------------+-----------------+-----------------------------------------¦
-    ¦ JavaScript ¦           62.3 ¦    Very High    ¦ Web Development, Frontend/Backend       ¦
-    ¦ C#         ¦           27.1 ¦      High       ¦ Game Development, Windows Apps, Web Dev ¦
-    ¦ Go         ¦           13.8 ¦     Growing     ¦ Cloud Services, System Programming      ¦
-    ¦ PowerShell ¦           13.5 ¦ Low to Moderate ¦ Task Automation, DevOps, System Admin   ¦
-    ¦ AutoIt     ¦            0.5 ¦       Low       ¦ Windows GUI Automation, Scripting       ¦
-
-==> Border style 3:
+==> Border style: "3=BorderAndHeader"
 
     +-----------------------------------------------------------------------------------------+
     ¦ Language   ¦ Popularity (%) ¦   Job Demand    ¦ Typical Use                             ¦
@@ -95,7 +98,19 @@ The `src/solve-smart.au3` file includes the DataToTable UDF (`#include "..\lib\D
     ¦ AutoIt     ¦            0.5 ¦       Low       ¦ Windows GUI Automation, Scripting       ¦
     +-----------------------------------------------------------------------------------------+
 
-### Output as file
+==> Border style: "4=BorderAndHeaderEdgesWithAccent"
+
+    +-----------------------------------------------------------------------------------------+
+    ¦ Language   ¦ Popularity (%) ¦   Job Demand    ¦ Typical Use                             ¦
+    +------------+----------------+-----------------+-----------------------------------------¦
+    ¦ JavaScript ¦           62.3 ¦    Very High    ¦ Web Development, Frontend/Backend       ¦
+    ¦ C#         ¦           27.1 ¦      High       ¦ Game Development, Windows Apps, Web Dev ¦
+    ¦ Go         ¦           13.8 ¦     Growing     ¦ Cloud Services, System Programming      ¦
+    ¦ PowerShell ¦           13.5 ¦ Low to Moderate ¦ Task Automation, DevOps, System Admin   ¦
+    ¦ AutoIt     ¦            0.5 ¦       Low       ¦ Windows GUI Automation, Scripting       ¦
+    +-----------------------------------------------------------------------------------------+
+
+### Output as file or GUI
 
 ![output-result](./assets/images/output-result.jpg)
 
