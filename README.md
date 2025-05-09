@@ -63,6 +63,20 @@ Local Const $aData[][5] = _
 
 ### Output result
 
+⚠ The output result only looks good in case you use a monospace font.
+
+#### Border style editor view (notepad.exe)
+
+<details>
+  <summary>👀 expand ↔ collapse</summary>
+
+![1-4](assets/images/border-styles-1-to-4.jpg)
+![5-8](assets/images/border-styles-5-to-8.jpg)
+
+</details>
+
+#### Border style markdown view
+
 ==> Border style: "1 = no-border"
 
     Language   Popularity (%)   Job Demand                                Typical Use
