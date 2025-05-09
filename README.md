@@ -1,50 +1,32 @@
 # Welcome to "data-to-table" 👋
 
-This repository is a rewrite and enhancement of the nice AutoIt UDF "StringToTable.au3 by "ioa747".<br>
-https://www.autoitscript.com/forum/topic/212876-_stringtotable/
+This library (UDF) allows you to transform input data, like strings or arrays, to a nice readable table output with different border styles. Output your data to console, file or GUI.
 
-Please check out the [upcoming features](#new-ideas-upcoming-features) section.
+👉 Please check out the [upcoming features](#ideas--upcoming-features) section.
 
-> All credits for the original logic go to ioa747 who made the UDF<br>
-> with ❤️ for readable and elegant output.
+The repository is highly inspired by the great AutoIt UDF "StringToTable.au3 by "ioa747".<br>
+Forum thread link: https://www.autoitscript.com/forum/topic/212876-_stringtotable/
 
-<br>
-
-## StringToTable.au3 v0.3.1 (by ioa747)
-
-    ; ====================================================================================================
-    ; Title...........: StringToTable UDF
-    ; Description.....: Converts a string or array to a formatted table with alignment and frame options.
-    ; AutoIt Version..: 3.3.16.1   Author: ioa747  Script Version: v0.3.1
-    ; Note............: Testet in Win10 22H2
-    ; ====================================================================================================
-
-The `src/ioa747.au3` file includes the StringToTable UDF (`#include "..\lib\StringToTable.au3"`).
+> All credits for the **original logic** go to "ioa747" who made<br>
+> the UDF with ❤️ for a readable and elegant output.
 
 <br>
 
-## DataToTable.au3 v0.2.0 (by Sven Seyfert (SOLVE-SMART))
+## Different approach compared to the original UDF (library)
 
-    ; ====================================================================================================
-    ; Title...........: DataToTable UDF
-    ; Description.....: Converts a string or array to a formatted table with alignment and border options.
-    ; AutoIt Version..: 3.3.16.1   Author: Sven Seyfert (SOLVE-SMART)   Script Version: v0.2.0
-    ; Note............: Testet in Win10 22H2
-    ; ====================================================================================================
-
-The `src/solve-smart.au3` file includes the DataToTable UDF (`#include "..\lib\DataToTable.au3"`).
-
-### Rewrite and enhancement
-
-- more abstraction by separating code blocks into separate functions
-- usage of maps
+- more abstraction by separate code blocks for separate responsibilities
 - enhanced error handling
-- modification friendly
+- usage of maps
+- modification friendly / expandable
 
-### New ideas (upcoming features)
+<br>
 
-- [ ] add markdown table format
-- [ ] add gherkin feature table format
+### Ideas / upcoming features
+
+- [x] add more flexibility for border styles creation
+- [ ] create how-to about how user can add border styles
+- [ ] add *markdown table* format
+- [ ] add *gherkin feature table* format
 - [ ] check for other table related formats
 
 <br>
@@ -54,6 +36,7 @@ The `src/solve-smart.au3` file includes the DataToTable UDF (`#include "..\lib\D
 ### Input as string
 
 ``` autoit
+; The $sData string is separated (columns) by tabs.
 Local Const $sData = _
     'Language	Popularity (%)	Job Demand	Typical Use' & @CRLF & _
     'JavaScript	62.3	Very High	Web Development, Frontend/Backend' & @CRLF & _
@@ -66,6 +49,7 @@ Local Const $sData = _
 ### Input as array
 
 ``` autoit
+; Default separator is @TAB.
 Local Const $aData[][5] = _
     [ _
         ['Language',    'Popularity (%)', 'Job Demand',      'Typical Use'                             ], _
@@ -77,68 +61,96 @@ Local Const $aData[][5] = _
     ]
 ```
 
-### Output on console
+### Output result
 
-It's not very obvious what are the differences between the variants are.<br>
-So it's better to see the next section [Output in file or GUI](#output-in-file-or-gui).
+==> Border style: "1 = no-border"
 
-==> Border style: "0=NoBorder"
-
-    Language   Popularity (%)   Job Demand    Typical Use
-    JavaScript           62.3    Very High    Web Development, Frontend/Backend
+    Language   Popularity (%)   Job Demand                                Typical Use
+    JavaScript           62.3    Very High          Web Development, Frontend/Backend
     C#                   27.1      High       Game Development, Windows Apps, Web Dev
-    Go                   13.8     Growing     Cloud Services, System Programming
-    PowerShell           13.5 Low to Moderate Task Automation, DevOps, System Admin
-    AutoIt                0.5       Low       Windows GUI Automation, Scripting
+    Go                   13.8     Growing          Cloud Services, System Programming
+    PowerShell           13.5 Low to Moderate   Task Automation, DevOps, System Admin
+    AutoIt                0.5       Low             Windows GUI Automation, Scripting
 
-==> Border style: "1=HeaderNoBorder"
+==> Border style: "2 = inner-border-header"
 
-    ¦ Language   ¦ Popularity (%) ¦   Job Demand    ¦ Typical Use                             ¦
-    +------------+----------------+-----------------+-----------------------------------------¦
-    ¦ JavaScript ¦           62.3 ¦    Very High    ¦ Web Development, Frontend/Backend       ¦
-    ¦ C#         ¦           27.1 ¦      High       ¦ Game Development, Windows Apps, Web Dev ¦
-    ¦ Go         ¦           13.8 ¦     Growing     ¦ Cloud Services, System Programming      ¦
-    ¦ PowerShell ¦           13.5 ¦ Low to Moderate ¦ Task Automation, DevOps, System Admin   ¦
-    ¦ AutoIt     ¦            0.5 ¦       Low       ¦ Windows GUI Automation, Scripting       ¦
+     Language   │ Popularity (%) │   Job Demand    │                             Typical Use
+    ────────────┼────────────────┼─────────────────┼─────────────────────────────────────────
+     JavaScript │           62.3 │    Very High    │       Web Development, Frontend/Backend
+     C#         │           27.1 │      High       │ Game Development, Windows Apps, Web Dev
+     Go         │           13.8 │     Growing     │      Cloud Services, System Programming
+     PowerShell │           13.5 │ Low to Moderate │   Task Automation, DevOps, System Admin
+     AutoIt     │            0.5 │       Low       │       Windows GUI Automation, Scripting
 
-==> Border style: "2=BorderNoHeader"
+==> Border style: "3 = border-no-header"
 
-    +-----------------------------------------------------------------------------------------+
-    ¦ Language   ¦ Popularity (%) ¦   Job Demand    ¦ Typical Use                             ¦
-    ¦ JavaScript ¦           62.3 ¦    Very High    ¦ Web Development, Frontend/Backend       ¦
-    ¦ C#         ¦           27.1 ¦      High       ¦ Game Development, Windows Apps, Web Dev ¦
-    ¦ Go         ¦           13.8 ¦     Growing     ¦ Cloud Services, System Programming      ¦
-    ¦ PowerShell ¦           13.5 ¦ Low to Moderate ¦ Task Automation, DevOps, System Admin   ¦
-    ¦ AutoIt     ¦            0.5 ¦       Low       ¦ Windows GUI Automation, Scripting       ¦
-    +-----------------------------------------------------------------------------------------+
+    ┌────────────┬────────────────┬─────────────────┬─────────────────────────────────────────┐
+    │ Language   │ Popularity (%) │   Job Demand    │                             Typical Use │
+    │ JavaScript │           62.3 │    Very High    │       Web Development, Frontend/Backend │
+    │ C#         │           27.1 │      High       │ Game Development, Windows Apps, Web Dev │
+    │ Go         │           13.8 │     Growing     │      Cloud Services, System Programming │
+    │ PowerShell │           13.5 │ Low to Moderate │   Task Automation, DevOps, System Admin │
+    │ AutoIt     │            0.5 │       Low       │       Windows GUI Automation, Scripting │
+    └────────────┴────────────────┴─────────────────┴─────────────────────────────────────────┘
 
-==> Border style: "3=BorderAndHeader"
+==> Border style: "4 = border-and-header"
 
-    +-----------------------------------------------------------------------------------------+
-    ¦ Language   ¦ Popularity (%) ¦   Job Demand    ¦ Typical Use                             ¦
-    +------------+----------------+-----------------+-----------------------------------------¦
-    ¦ JavaScript ¦           62.3 ¦    Very High    ¦ Web Development, Frontend/Backend       ¦
-    ¦ C#         ¦           27.1 ¦      High       ¦ Game Development, Windows Apps, Web Dev ¦
-    ¦ Go         ¦           13.8 ¦     Growing     ¦ Cloud Services, System Programming      ¦
-    ¦ PowerShell ¦           13.5 ¦ Low to Moderate ¦ Task Automation, DevOps, System Admin   ¦
-    ¦ AutoIt     ¦            0.5 ¦       Low       ¦ Windows GUI Automation, Scripting       ¦
-    +-----------------------------------------------------------------------------------------+
+    ┌────────────┬────────────────┬─────────────────┬─────────────────────────────────────────┐
+    │ Language   │ Popularity (%) │   Job Demand    │                             Typical Use │
+    ├────────────┼────────────────┼─────────────────┼─────────────────────────────────────────┤
+    │ JavaScript │           62.3 │    Very High    │       Web Development, Frontend/Backend │
+    │ C#         │           27.1 │      High       │ Game Development, Windows Apps, Web Dev │
+    │ Go         │           13.8 │     Growing     │      Cloud Services, System Programming │
+    │ PowerShell │           13.5 │ Low to Moderate │   Task Automation, DevOps, System Admin │
+    │ AutoIt     │            0.5 │       Low       │       Windows GUI Automation, Scripting │
+    └────────────┴────────────────┴─────────────────┴─────────────────────────────────────────┘
 
-==> Border style: "4=BorderAndHeaderEdgesWithAccent"
+==> Border style: "5 = border-edges-with-accent-and-header"
 
-    +-----------------------------------------------------------------------------------------+
-    ¦ Language   ¦ Popularity (%) ¦   Job Demand    ¦ Typical Use                             ¦
-    +------------+----------------+-----------------+-----------------------------------------¦
-    ¦ JavaScript ¦           62.3 ¦    Very High    ¦ Web Development, Frontend/Backend       ¦
-    ¦ C#         ¦           27.1 ¦      High       ¦ Game Development, Windows Apps, Web Dev ¦
-    ¦ Go         ¦           13.8 ¦     Growing     ¦ Cloud Services, System Programming      ¦
-    ¦ PowerShell ¦           13.5 ¦ Low to Moderate ¦ Task Automation, DevOps, System Admin   ¦
-    ¦ AutoIt     ¦            0.5 ¦       Low       ¦ Windows GUI Automation, Scripting       ¦
-    +-----------------------------------------------------------------------------------------+
+    ╔────────────┬────────────────┬─────────────────┬─────────────────────────────────────────╗
+    │ Language   │ Popularity (%) │   Job Demand    │                             Typical Use │
+    ├────────────┼────────────────┼─────────────────┼─────────────────────────────────────────┤
+    │ JavaScript │           62.3 │    Very High    │       Web Development, Frontend/Backend │
+    │ C#         │           27.1 │      High       │ Game Development, Windows Apps, Web Dev │
+    │ Go         │           13.8 │     Growing     │      Cloud Services, System Programming │
+    │ PowerShell │           13.5 │ Low to Moderate │   Task Automation, DevOps, System Admin │
+    │ AutoIt     │            0.5 │       Low       │       Windows GUI Automation, Scripting │
+    ╚────────────┴────────────────┴─────────────────┴─────────────────────────────────────────╝
 
-### Output in file or GUI
+==> Border style: "6 = double-outter-border-no-header"
 
-![output-result](./assets/images/output-result.jpg)
+    ╔════════════╤════════════════╤═════════════════╤═════════════════════════════════════════╗
+    ║ Language   │ Popularity (%) │   Job Demand    │                             Typical Use ║
+    ║ JavaScript │           62.3 │    Very High    │       Web Development, Frontend/Backend ║
+    ║ C#         │           27.1 │      High       │ Game Development, Windows Apps, Web Dev ║
+    ║ Go         │           13.8 │     Growing     │      Cloud Services, System Programming ║
+    ║ PowerShell │           13.5 │ Low to Moderate │   Task Automation, DevOps, System Admin ║
+    ║ AutoIt     │            0.5 │       Low       │       Windows GUI Automation, Scripting ║
+    ╚════════════╧════════════════╧═════════════════╧═════════════════════════════════════════╝
+
+==> Border style: "7 = all-double-border-and-header"
+
+    ╔════════════╦════════════════╦═════════════════╦═════════════════════════════════════════╗
+    ║ Language   ║ Popularity (%) ║   Job Demand    ║                             Typical Use ║
+    ╠════════════╬════════════════╬═════════════════╬═════════════════════════════════════════╣
+    ║ JavaScript ║           62.3 ║    Very High    ║       Web Development, Frontend/Backend ║
+    ║ C#         ║           27.1 ║      High       ║ Game Development, Windows Apps, Web Dev ║
+    ║ Go         ║           13.8 ║     Growing     ║      Cloud Services, System Programming ║
+    ║ PowerShell ║           13.5 ║ Low to Moderate ║   Task Automation, DevOps, System Admin ║
+    ║ AutoIt     ║            0.5 ║       Low       ║       Windows GUI Automation, Scripting ║
+    ╚════════════╩════════════════╩═════════════════╩═════════════════════════════════════════╝
+
+==> Border style: "8 = double-outter-border-and-header-with-single-inner-border"
+
+    ╔════════════╤════════════════╤═════════════════╤═════════════════════════════════════════╗
+    ║ Language   │ Popularity (%) │   Job Demand    │                             Typical Use ║
+    ╟────────────┼────────────────┼─────────────────┼─────────────────────────────────────────╢
+    ║ JavaScript │           62.3 │    Very High    │       Web Development, Frontend/Backend ║
+    ║ C#         │           27.1 │      High       │ Game Development, Windows Apps, Web Dev ║
+    ║ Go         │           13.8 │     Growing     │      Cloud Services, System Programming ║
+    ║ PowerShell │           13.5 │ Low to Moderate │   Task Automation, DevOps, System Admin ║
+    ║ AutoIt     │            0.5 │       Low       │       Windows GUI Automation, Scripting ║
+    ╚════════════╧════════════════╧═════════════════╧═════════════════════════════════════════╝
 
 <br>
 
