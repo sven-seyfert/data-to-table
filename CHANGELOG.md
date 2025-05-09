@@ -11,6 +11,28 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 
 ## [Unreleased]
 
+## [0.3.0] - 2025-05-09
+
+### Added
+
+- .gitignore file. [79908e8](https://github.com/sven-seyfert/data-to-table/commit/79908e8087ed9cc02aa519edaad78658a26b44ad)
+- Output result file (also for the README). [45d364a](https://github.com/sven-seyfert/data-to-table/commit/45d364aa41cf4a4a29eeecca1e8824777a5a3689)
+- Border style images (notepad.exe view). [800f234](https://github.com/sven-seyfert/data-to-table/commit/800f234228b9889ebab57c37a04930a513a08385)
+
+### Changed
+
+- Restructuring, refactoring, enhancement to lead to more flexibility in general. [ccb118c](https://github.com/sven-seyfert/data-to-table/commit/ccb118c34cc521f6973aebba54062018c8555e45)
+- Rename and enhance library calling file 'main.au3'. [a6fb745](https://github.com/sven-seyfert/data-to-table/commit/a6fb74578093d5d2ddd3b803e646680dbb481df5)
+
+### Documented
+
+- Update README.md file. [a65a64b](https://github.com/sven-seyfert/data-to-table/commit/a65a64b7c14e86c4f1bb9c7930c4bbf6a9970bb6)
+
+### Removed
+
+- Unnecessary files regarding the original UDF library. [f8c2fe6](https://github.com/sven-seyfert/data-to-table/commit/f8c2fe6dec8f28118f26a41ed4fd27ccb374b559)
+- Output result image for the README.md (not necessary anymore). [29cb993](https://github.com/sven-seyfert/data-to-table/commit/29cb9933a014954b72517a2088b83a64af96b75b)
+
 ## [0.2.0] - 2025-05-08
 
 ### Added
@@ -42,7 +64,8 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 
 - Small adjustments. [56c4368](https://github.com/sven-seyfert/data-to-table/commit/56c4368c70c0e2497e26d4152a3094e8bfaefde1)
 
-[Unreleased]: https://github.com/sven-seyfert/data-to-table/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/sven-seyfert/data-to-table/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/sven-seyfert/data-to-table/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/sven-seyfert/data-to-table/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/sven-seyfert/data-to-table/releases/tag/v0.1.0
 
