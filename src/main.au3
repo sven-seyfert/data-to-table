@@ -111,6 +111,20 @@ Func _DemoArrayDataToTable()
     EndIf
     $sOut &= StringFormat('\n==> Border style: "8 = double-outter-border-and-header-with-single-inner-border"\n\n%s', $sResult)
 
+    ;~ 9 = rounded-corner-outside-border-only-no-header
+    $sResult = _DataToTable($aData, 9, @TAB, 'L, R, C, R')
+    If @error Then
+        _ShowError()
+    EndIf
+    $sOut &= StringFormat('\n==> Border style: "9 = rounded-corner-outside-border-only-no-header"\n\n%s', $sResult)
+
+    ;~ 10 = double-outside-border-only-no-header
+    $sResult = _DataToTable($aData, 10, @TAB, 'L, R, C, R')
+    If @error Then
+        _ShowError()
+    EndIf
+    $sOut &= StringFormat('\n==> Border style: "10 = double-outside-border-only-no-header"\n\n%s', $sResult)
+
     ; tests (more to be defined)
     $sOut &= StringFormat('\n%s\n\nother tests:\n', _StringRepeat('-', 80))
 
