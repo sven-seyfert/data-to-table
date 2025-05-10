@@ -26,7 +26,8 @@ Forum thread link: https://www.autoitscript.com/forum/topic/212876-_stringtotabl
 ### Ideas / upcoming features
 
 - [x] add more flexibility for border styles creation
-- [ ] create how-to about how user can add border styles
+- [x] create how-to about how user can add border styles
+- [ ] add other ways of input data (by console out or via file for example)
 - [ ] add *markdown table* format
 - [ ] add *gherkin feature table* format
 - [ ] check for other table related formats
