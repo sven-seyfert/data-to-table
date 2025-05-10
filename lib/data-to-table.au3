@@ -6,9 +6,9 @@
 #include <Array.au3>
 #include <String.au3>
 
-Global $mParam[]
-Global $mConst[]
-Global $mBorder[]
+Global $DTT_mParam[]
+Global $DTT_mConst[]
+Global $DTT_mBorder[]
 
 ; #FUNCTION# ====================================================================================================================
 ; Name...........: _DataToTable
@@ -50,9 +50,8 @@ Global $mBorder[]
 ;                  ConsoleWrite(_DataToTable($aData, 3, @TAB, 'L, R, C, R'))
 ; ===============================================================================================================================
 Func _DataToTable($vData, $iBorderStyle = 3, $sSeparator = @TAB, $sColumnAlign = '')
-    __ConfigureParameters($iBorderStyle, $sSeparator, $sColumnAlign)
-
     __SetConstants()
+    __ConfigureParameters($iBorderStyle, $sSeparator, $sColumnAlign)
     __SetBorderStyle()
 
     Local Const $sData = __ExtractRawData($vData)
@@ -91,11 +90,11 @@ Func _DataToTable($vData, $iBorderStyle = 3, $sSeparator = @TAB, $sColumnAlign =
     ; build result (border, header and aligned cell text)
     Local $sResult, $sInterimResult
 
-    If $mBorder.HasBorder Then
+    If $DTT_mBorder.HasBorder Then
         $sResult &= __BuildTopBorder($iColumns, $aColWidths)
     EndIf
 
-    If $mBorder.HasHeaderBorder Then
+    If $DTT_mBorder.HasHeaderBorder Then
         $sInterimResult = __BuildHeaderRowBorder($iColumns, $aTable, $aColWidths, $aAlign)
         If @error Then
             __Log('at __BuildHeaderRowBorder()')
@@ -113,7 +112,7 @@ Func _DataToTable($vData, $iBorderStyle = 3, $sSeparator = @TAB, $sColumnAlign =
 
     $sResult &= $sInterimResult
 
-    If Not $mBorder.HasBorder Then
+    If Not $DTT_mBorder.HasBorder Then
         Return $sResult
     EndIf
 
@@ -129,91 +128,90 @@ EndFunc
 
 ; #INTERNAL_USE_ONLY# ===========================================================================================================
 Func __SetConstants()
-    $mConst.AcceptedAlignCharacters = 'CLR'
-    $mConst.Delimiter              = @LF
-    $mConst.EmptyString            = ''
-    $mConst.EntireDelimiterFlag    = 1
-    $mConst.LeadingTrailingFlag    = 1 + 2
-    $mConst.SingleWhitespace       = ' '
-    $mConst.ZeroBasedArrayFlag     = 2
+    $DTT_mConst.AcceptedAlignCharacters = 'CLR'
+    $DTT_mConst.DefaultBorderStyle     = 4
+    $DTT_mConst.Delimiter              = @LF
+    $DTT_mConst.EmptyString            = ''
+    $DTT_mConst.EntireDelimiterFlag    = 1
+    $DTT_mConst.LeadingTrailingFlag    = 1 + 2
+    $DTT_mConst.MaxBorderStyles        = 10
+    $DTT_mConst.SingleWhitespace       = ' '
+    $DTT_mConst.ZeroBasedArrayFlag     = 2
 
-    $mParam.AlignCenter            = 'C'
-    $mParam.AlignLeft              = 'L'
-    $mParam.AlignRight             = 'R'
+    $DTT_mParam.AlignCenter            = 'C'
+    $DTT_mParam.AlignLeft              = 'L'
+    $DTT_mParam.AlignRight             = 'R'
 EndFunc
 
 Func __SetBorderStyle()
     Local Const $aBorderStyle[][11] = _
         [ _
-            ['',                     1,     2,     3,     4,     5,     6,     7,     8,     9,     10 ], _
-            ['EdgeTopLeft',         '',    '┌',   '┌',   '┌',   '╔',   '╔',   '╔',   '╔',   '╭',   '╔'], _
-            ['EdgeTopRight',        '',    '┐',   '┐',   '┐',   '╗',   '╗',   '╗',   '╗',   '╮',   '╗'], _
-            ['EdgeBottomLeft',      '',    '└',   '└',   '└',   '╚',   '╚',   '╚',   '╚',   '╰',   '╚'], _
-            ['EdgeBottomRight',     '',    '┘',   '┘',   '┘',   '╝',   '╝',   '╝',   '╝',   '╯',   '╝'], _
+            ['',                     1,     2,     3,     4,     5,     6,     7,     8,     9,    10], _
+            ['EdgeTopLeft',         '',   '┌',   '┌',   '┌',   '╔',   '╔',   '╔',   '╔',   '╭',   '╔'], _
+            ['EdgeTopRight',        '',   '┐',   '┐',   '┐',   '╗',   '╗',   '╗',   '╗',   '╮',   '╗'], _
+            ['EdgeBottomLeft',      '',   '└',   '└',   '└',   '╚',   '╚',   '╚',   '╚',   '╰',   '╚'], _
+            ['EdgeBottomRight',     '',   '┘',   '┘',   '┘',   '╝',   '╝',   '╝',   '╝',   '╯',   '╝'], _
             _
-            ['TopCross',            '',    '┬',   '┬',   '┬',   '┬',   '╤',   '╦',   '╤',   '─',   '═'], _
-            ['HeaderCross',         '',    '┼',   '┼',   '┼',   '┼',   '┼',   '╬',   '┼',   ' ',   ' '], _
-            ['BottomCross',         '',    '┴',   '┴',   '┴',   '┴',   '╧',   '╩',   '╧',   '─',   '═'], _
+            ['TopCross',            '',   '┬',   '┬',   '┬',   '┬',   '╤',   '╦',   '╤',   '─',   '═'], _
+            ['HeaderCross',         '',   '┼',   '┼',   '┼',   '┼',   '┼',   '╬',   '┼',   ' ',   ' '], _
+            ['BottomCross',         '',   '┴',   '┴',   '┴',   '┴',   '╧',   '╩',   '╧',   '─',   '═'], _
             _
-            ['TopHorizontal',       '',    '─',   '─',   '─',   '─',   '═',   '═',   '═',   '─',   '═'], _
-            ['HeaderHorizontal',    '',    '─',   '─',   '─',   '─',   '─',   '═',   '─',   ' ',   ' '], _
-            ['BottomHorizontal',    '',    '─',   '─',   '─',   '─',   '═',   '═',   '═',   '─',   '═'], _
+            ['TopHorizontal',       '',   '─',   '─',   '─',   '─',   '═',   '═',   '═',   '─',   '═'], _
+            ['HeaderHorizontal',    '',   '─',   '─',   '─',   '─',   '─',   '═',   '─',   ' ',   ' '], _
+            ['BottomHorizontal',    '',   '─',   '─',   '─',   '─',   '═',   '═',   '═',   '─',   '═'], _
             _
-            ['HeaderVerticalLeft',  '',    '',    '│',   '│',   '│',   '│',   '║',   '║',   '│',   '║'], _
-            ['HeaderSeparator',     '',    '│',   '│',   '│',   '│',   '│',   '║',   '│',   ' ',   ' '], _
-            ['HeaderVerticalRight', '',    '',    '│',   '│',   '│',   '│',   '║',   '║',   '│',   '║'], _
-            ['HeaderLeft',          '',    '',    '├',   '│',   '├',   '├',   '╠',   '╟',   '│',   '║'], _
-            ['HeaderRight',         '',    '',    '┤',   '│',   '┤',   '┤',   '╣',   '╢',   '│',   '║'], _
+            ['HeaderVerticalLeft',  '',   '',    '│',   '│',   '│',   '│',   '║',   '║',   '│',   '║'], _
+            ['HeaderSeparator',     '',   '│',   '│',   '│',   '│',   '│',   '║',   '│',   ' ',   ' '], _
+            ['HeaderVerticalRight', '',   '',    '│',   '│',   '│',   '│',   '║',   '║',   '│',   '║'], _
+            ['HeaderLeft',          '',   '',    '├',   '├',   '├',   '├',   '╠',   '╟',   '│',   '║'], _
+            ['HeaderRight',         '',   '',    '┤',   '┤',   '┤',   '┤',   '╣',   '╢',   '│',   '║'], _
             _
-            ['VerticalLeft',        '',    '',    '│',   '│',   '│',   '║',   '║',   '║',   '│',   '║'], _
-            ['Vertical',            '',    '│',   '│',   '│',   '│',   '│',   '║',   '│',   ' ',   ' '], _
-            ['VerticalRight',       '',    '',    '│',   '│',   '│',   '║',   '║',   '║',   '│',   '║'], _
+            ['VerticalLeft',        '',   '',    '│',   '│',   '│',   '║',   '║',   '║',   '│',   '║'], _
+            ['Vertical',            '',   '│',   '│',   '│',   '│',   '│',   '║',   '│',   ' ',   ' '], _
+            ['VerticalRight',       '',   '',    '│',   '│',   '│',   '║',   '║',   '║',   '│',   '║'], _
             _
-            ['HasBorder',           '',    '',    'x',   'x',   'x',   'x',   'x',   'x',   'x',   'x'], _
-            ['HasHeaderBorder',     '',    'x',   '',    'x',   'x',   '',    'x',   'x',   '',   ''] _
+            ['HasBorder',           '',   '',    'x',   'x',   'x',   'x',   'x',   'x',   'x',   'x'], _
+            ['HasHeaderBorder',     '',   'x',   '',    'x',   'x',   '',    'x',   'x',   '',    '' ] _
         ]
 
-    $mBorder.EdgeTopLeft         = $aBorderStyle[1][$mParam.BorderStyle]
-    $mBorder.EdgeTopRight        = $aBorderStyle[2][$mParam.BorderStyle]
-    $mBorder.EdgeBottomLeft      = $aBorderStyle[3][$mParam.BorderStyle]
-    $mBorder.EdgeBottomRight     = $aBorderStyle[4][$mParam.BorderStyle]
+    $DTT_mBorder.EdgeTopLeft         = $aBorderStyle[1][$DTT_mParam.BorderStyle]
+    $DTT_mBorder.EdgeTopRight        = $aBorderStyle[2][$DTT_mParam.BorderStyle]
+    $DTT_mBorder.EdgeBottomLeft      = $aBorderStyle[3][$DTT_mParam.BorderStyle]
+    $DTT_mBorder.EdgeBottomRight     = $aBorderStyle[4][$DTT_mParam.BorderStyle]
 
-    $mBorder.TopCross            = $aBorderStyle[5][$mParam.BorderStyle]
-    $mBorder.HeaderCross         = $aBorderStyle[6][$mParam.BorderStyle]
-    $mBorder.BottomCross         = $aBorderStyle[7][$mParam.BorderStyle]
+    $DTT_mBorder.TopCross            = $aBorderStyle[5][$DTT_mParam.BorderStyle]
+    $DTT_mBorder.HeaderCross         = $aBorderStyle[6][$DTT_mParam.BorderStyle]
+    $DTT_mBorder.BottomCross         = $aBorderStyle[7][$DTT_mParam.BorderStyle]
 
-    $mBorder.TopHorizontal       = $aBorderStyle[8][$mParam.BorderStyle]
-    $mBorder.HeaderHorizontal    = $aBorderStyle[9][$mParam.BorderStyle]
-    $mBorder.BottomHorizontal    = $aBorderStyle[10][$mParam.BorderStyle]
+    $DTT_mBorder.TopHorizontal       = $aBorderStyle[8][$DTT_mParam.BorderStyle]
+    $DTT_mBorder.HeaderHorizontal    = $aBorderStyle[9][$DTT_mParam.BorderStyle]
+    $DTT_mBorder.BottomHorizontal    = $aBorderStyle[10][$DTT_mParam.BorderStyle]
 
-    $mBorder.HeaderVerticalLeft  = $aBorderStyle[11][$mParam.BorderStyle]
-    $mBorder.HeaderSeparator     = $aBorderStyle[12][$mParam.BorderStyle]
-    $mBorder.HeaderVerticalRight = $aBorderStyle[13][$mParam.BorderStyle]
-    $mBorder.HeaderLeft          = $aBorderStyle[14][$mParam.BorderStyle]
-    $mBorder.HeaderRight         = $aBorderStyle[15][$mParam.BorderStyle]
+    $DTT_mBorder.HeaderVerticalLeft  = $aBorderStyle[11][$DTT_mParam.BorderStyle]
+    $DTT_mBorder.HeaderSeparator     = $aBorderStyle[12][$DTT_mParam.BorderStyle]
+    $DTT_mBorder.HeaderVerticalRight = $aBorderStyle[13][$DTT_mParam.BorderStyle]
+    $DTT_mBorder.HeaderLeft          = $aBorderStyle[14][$DTT_mParam.BorderStyle]
+    $DTT_mBorder.HeaderRight         = $aBorderStyle[15][$DTT_mParam.BorderStyle]
 
-    $mBorder.VerticalLeft        = $aBorderStyle[16][$mParam.BorderStyle]
-    $mBorder.Vertical            = $aBorderStyle[17][$mParam.BorderStyle]
-    $mBorder.VerticalRight       = $aBorderStyle[18][$mParam.BorderStyle]
+    $DTT_mBorder.VerticalLeft        = $aBorderStyle[16][$DTT_mParam.BorderStyle]
+    $DTT_mBorder.Vertical            = $aBorderStyle[17][$DTT_mParam.BorderStyle]
+    $DTT_mBorder.VerticalRight       = $aBorderStyle[18][$DTT_mParam.BorderStyle]
 
-    $mBorder.HasBorder           = StringLower($aBorderStyle[19][$mParam.BorderStyle]) == 'x' ? True : False
-    $mBorder.HasHeaderBorder     = StringLower($aBorderStyle[20][$mParam.BorderStyle]) == 'x' ? True : False
+    $DTT_mBorder.HasBorder           = StringLower($aBorderStyle[19][$DTT_mParam.BorderStyle]) == 'x' ? True : False
+    $DTT_mBorder.HasHeaderBorder     = StringLower($aBorderStyle[20][$DTT_mParam.BorderStyle]) == 'x' ? True : False
 EndFunc
 
 Func __ConfigureParameters($iBorderStyle, $sSeparator, $sColumnAlign)
-    $mParam.BorderStyle = $iBorderStyle
-    $mParam.Separator   = $sSeparator
-    $mParam.ColumnAlign = StringUpper($sColumnAlign)
+    $DTT_mParam.BorderStyle = $iBorderStyle
+    $DTT_mParam.Separator   = $sSeparator
+    $DTT_mParam.ColumnAlign = StringUpper($sColumnAlign)
 
-    Local Const $iMaxBorderStyles    = 10
-    Local Const $iDefaultBorderStyle = 4
-
-    If Not IsInt($mParam.BorderStyle) Or $mParam.BorderStyle < 1 Or $mParam.BorderStyle > $iMaxBorderStyles Then
-        $mParam.BorderStyle = $iDefaultBorderStyle
+    If Not IsInt($DTT_mParam.BorderStyle) Or $DTT_mParam.BorderStyle < 1 Or $DTT_mParam.BorderStyle > $DTT_mConst.MaxBorderStyles Then
+        $DTT_mParam.BorderStyle = $DTT_mConst.DefaultBorderStyle
     EndIf
 
-    If $mParam.Separator = Default Or $mParam.Separator == -1 Then
-        $mParam.Separator = @TAB
+    If $DTT_mParam.Separator = Default Or $DTT_mParam.Separator == -1 Then
+        $DTT_mParam.Separator = @TAB
     EndIf
 EndFunc
 
@@ -222,7 +220,7 @@ Func __ExtractRawData($vData)
         Return $vData
     EndIf
 
-    Local $sData = _ArrayToString($vData, $mParam.Separator)
+    Local $sData = _ArrayToString($vData, $DTT_mParam.Separator)
     If @error Then
         __Log('_ArrayToString() error')
         Return SetError(1)
@@ -238,10 +236,10 @@ Func __NormalizeLineEndings($sData)
         Return SetError(1)
     EndIf
 
-    $sData = StringReplace($sData, $mParam.Separator & @CRLF, @CRLF)
-    $sData = StringReplace($sData, @CRLF & $mParam.Separator, @CRLF)
+    $sData = StringReplace($sData, $DTT_mParam.Separator & @CRLF, @CRLF)
+    $sData = StringReplace($sData, @CRLF & $DTT_mParam.Separator, @CRLF)
 
-    $sData = StringRegExpReplace($sData, '(\r\n)$', $mConst.EmptyString)
+    $sData = StringRegExpReplace($sData, '(\r\n)$', $DTT_mConst.EmptyString)
     If @error Then
         __Log('StringRegExpReplace() error')
         Return SetError(1)
@@ -251,7 +249,7 @@ Func __NormalizeLineEndings($sData)
 EndFunc
 
 Func __SplitIntoRows($sData)
-    Local Const $aDataList = StringSplit($sData, $mConst.Delimiter, $mConst.EntireDelimiterFlag)
+    Local Const $aDataList = StringSplit($sData, $DTT_mConst.Delimiter, $DTT_mConst.EntireDelimiterFlag)
     If @error Then
         __Log('StringSplit() error')
         Return SetError(1)
@@ -266,7 +264,7 @@ Func __BuildTable($aRows)
     Local $aTable[UBound($aRows)][0]
 
     For $i = 1 To $iCount
-        Local $aColums = StringSplit($aRows[$i], $mParam.Separator, $mConst.EntireDelimiterFlag)
+        Local $aColums = StringSplit($aRows[$i], $DTT_mParam.Separator, $DTT_mConst.EntireDelimiterFlag)
         If @error Then
             __Log('StringSplit() error')
             Return SetError(1)
@@ -280,12 +278,12 @@ Func __BuildTable($aRows)
         If $iColumns < $aColums[0] Then
             ReDim $aColums[$iColumns + 1]
             For $j = $aColums[0] + 1 To $iColumns
-                $aColums[$j] = $mConst.EmptyString
+                $aColums[$j] = $DTT_mConst.EmptyString
             Next
         EndIf
 
         For $x = 0 To $iColumns - 1
-            $aTable[$i - 1][$x] = StringStripWS($aColums[$x + 1], $mConst.LeadingTrailingFlag)
+            $aTable[$i - 1][$x] = StringStripWS($aColums[$x + 1], $DTT_mConst.LeadingTrailingFlag)
         Next
     Next
 
@@ -316,14 +314,14 @@ EndFunc
 Func __DetermineColumnAlignments($iColumns)
     Local $aAlign[$iColumns]
 
-    If $mParam.ColumnAlign == $mConst.EmptyString Then
+    If $DTT_mParam.ColumnAlign == $DTT_mConst.EmptyString Then
         For $i = 0 To $iColumns - 1
-            $aAlign[$i] = $mParam.AlignLeft ; default
+            $aAlign[$i] = $DTT_mParam.AlignLeft ; default
         Next
         Return $aAlign
     EndIf
 
-    Local $aRawAlign = StringSplit($mParam.ColumnAlign, ',', $mConst.ZeroBasedArrayFlag)
+    Local $aRawAlign = StringSplit($DTT_mParam.ColumnAlign, ',', $DTT_mConst.ZeroBasedArrayFlag)
     If @error Then
         __Log('StringSplit() error')
         Return SetError(1)
@@ -332,10 +330,10 @@ Func __DetermineColumnAlignments($iColumns)
     Local $iIndex
     For $i = 0 To $iColumns - 1
         $iIndex = $i >= UBound($aRawAlign) ? UBound($aRawAlign) - 1 : $i
-        $aAlign[$i] = StringStripWS($aRawAlign[$iIndex], $mConst.LeadingTrailingFlag)
+        $aAlign[$i] = StringStripWS($aRawAlign[$iIndex], $DTT_mConst.LeadingTrailingFlag)
 
-        If Not StringRegExp($aAlign[$i], '^[' & $mConst.AcceptedAlignCharacters & ']$') Then
-            $aAlign[$i] = $mParam.AlignLeft
+        If Not StringRegExp($aAlign[$i], '^[' & $DTT_mConst.AcceptedAlignCharacters & ']$') Then
+            $aAlign[$i] = $DTT_mParam.AlignLeft
         EndIf
     Next
 
@@ -343,12 +341,12 @@ Func __DetermineColumnAlignments($iColumns)
 EndFunc
 
 Func __BuildTopBorder($iColumns, $aColWidths)
-    Local $sString = $mBorder.EdgeTopLeft
+    Local $sString = $DTT_mBorder.EdgeTopLeft
     For $i = 0 To $iColumns - 1
-        $sString &= _StringRepeat($mBorder.TopHorizontal, $aColWidths[$i] + 2)
-        $sString &= ($i < $iColumns - 1) ? $mBorder.TopCross : $mBorder.EdgeTopRight
+        $sString &= _StringRepeat($DTT_mBorder.TopHorizontal, $aColWidths[$i] + 2)
+        $sString &= ($i < $iColumns - 1) ? $DTT_mBorder.TopCross : $DTT_mBorder.EdgeTopRight
     Next
-    $sString &= $mConst.Delimiter
+    $sString &= $DTT_mConst.Delimiter
 
     Return $sString
 EndFunc
@@ -356,15 +354,15 @@ EndFunc
 Func __BuildHeaderRowBorder($iColumns, $aTable, $aColWidths, $aAlign)
     Local $sString
 
-    If $mBorder.HasBorder Or $mParam.BorderStyle == 2 Then
-        $sString &= $mBorder.HeaderVerticalLeft
+    If $DTT_mBorder.HasBorder Or $DTT_mParam.BorderStyle == 2 Then
+        $sString &= $DTT_mBorder.HeaderVerticalLeft
     EndIf
 
-    Local Const $sPrefix = ($mParam.BorderStyle = 1) ? $mConst.EmptyString : $mConst.SingleWhitespace
+    Local Const $sPrefix = ($DTT_mParam.BorderStyle = 1) ? $DTT_mConst.EmptyString : $DTT_mConst.SingleWhitespace
 
     Local $sCell
     For $i = 0 To $iColumns - 1
-        $sCell = __AlignCellText($aTable[0][$i], $aColWidths[$i], $aAlign[$i]) & $mConst.SingleWhitespace
+        $sCell = __AlignCellText($aTable[0][$i], $aColWidths[$i], $aAlign[$i]) & $DTT_mConst.SingleWhitespace
         If @error Then
             __Log('at __AlignCellText()')
             Return SetError(1)
@@ -372,27 +370,27 @@ Func __BuildHeaderRowBorder($iColumns, $aTable, $aColWidths, $aAlign)
 
         $sString &= $sPrefix & $sCell
         If $i < $iColumns - 1 Then
-            $sString &= ($mBorder.HasBorder Or $mParam.BorderStyle = 2) ? $mBorder.HeaderSeparator : $mConst.EmptyString
+            $sString &= ($DTT_mBorder.HasBorder Or $DTT_mParam.BorderStyle = 2) ? $DTT_mBorder.HeaderSeparator : $DTT_mConst.EmptyString
         EndIf
     Next
 
-    If $mBorder.HasBorder Or $mParam.BorderStyle == 2 Then
-        $sString &= $mBorder.HeaderVerticalRight
+    If $DTT_mBorder.HasBorder Or $DTT_mParam.BorderStyle == 2 Then
+        $sString &= $DTT_mBorder.HeaderVerticalRight
     EndIf
 
-    $sString &= $mConst.Delimiter
+    $sString &= $DTT_mConst.Delimiter
 
-    If $mBorder.HasBorder Then
-        $sString &= $mBorder.HeaderLeft
+    If $DTT_mBorder.HasBorder Then
+        $sString &= $DTT_mBorder.HeaderLeft
     EndIf
 
-    If $mParam.BorderStyle == 2 Then
-        $sString &= $mBorder.HeaderLeft
+    If $DTT_mParam.BorderStyle == 2 Then
+        $sString &= $DTT_mBorder.HeaderLeft
     EndIf
 
     Local $sHorizontalChars
     For $i = 0 To $iColumns - 1
-        $sHorizontalChars = _StringRepeat($mBorder.HeaderHorizontal, $aColWidths[$i] + 2)
+        $sHorizontalChars = _StringRepeat($DTT_mBorder.HeaderHorizontal, $aColWidths[$i] + 2)
         If @error Then
             __Log('_StringRepeat() error')
             Return SetError(1)
@@ -401,22 +399,22 @@ Func __BuildHeaderRowBorder($iColumns, $aTable, $aColWidths, $aAlign)
         $sString &= $sHorizontalChars
 
         Select
-            Case $i < $iColumns - 1 And $mBorder.HasBorder
-                $sString &= $mBorder.HeaderCross
+            Case $i < $iColumns - 1 And $DTT_mBorder.HasBorder
+                $sString &= $DTT_mBorder.HeaderCross
 
-            Case $i < $iColumns - 1 And $mParam.BorderStyle = 2
-                $sString &= $mBorder.HeaderCross
+            Case $i < $iColumns - 1 And $DTT_mParam.BorderStyle = 2
+                $sString &= $DTT_mBorder.HeaderCross
 
-            Case $i >= $iColumns - 1 And $mBorder.HasBorder
-                $sString &= $mBorder.HeaderRight
+            Case $i >= $iColumns - 1 And $DTT_mBorder.HasBorder
+                $sString &= $DTT_mBorder.HeaderRight
         EndSelect
     Next
 
-    If $mParam.BorderStyle == 2 Then
-        $sString &= $mBorder.HeaderRight
+    If $DTT_mParam.BorderStyle == 2 Then
+        $sString &= $DTT_mBorder.HeaderRight
     EndIf
 
-    $sString &= $mConst.Delimiter
+    $sString &= $DTT_mConst.Delimiter
 
     Return $sString
 EndFunc
@@ -424,14 +422,14 @@ EndFunc
 Func __BuildDataRowsBorder($aTable, $iColumns, $aColWidths, $aAlign)
     Local $sString
 
-    Local Const $iStart  = $mBorder.HasHeaderBorder ? 1 : 0
-    Local Const $sPrefix = ($mParam.BorderStyle = 1) ? $mConst.EmptyString : $mConst.SingleWhitespace
-    Local Const $sSuffix = $mConst.SingleWhitespace
+    Local Const $iStart  = $DTT_mBorder.HasHeaderBorder ? 1 : 0
+    Local Const $sPrefix = ($DTT_mParam.BorderStyle = 1) ? $DTT_mConst.EmptyString : $DTT_mConst.SingleWhitespace
+    Local Const $sSuffix = $DTT_mConst.SingleWhitespace
 
     Local $sCell
     For $i = $iStart To UBound($aTable) - 1
-        If $mBorder.HasBorder Or $mParam.BorderStyle == 2 Then
-            $sString &= $mBorder.VerticalLeft
+        If $DTT_mBorder.HasBorder Or $DTT_mParam.BorderStyle == 2 Then
+            $sString &= $DTT_mBorder.VerticalLeft
         EndIf
 
         For $j = 0 To $iColumns - 1
@@ -443,56 +441,56 @@ Func __BuildDataRowsBorder($aTable, $iColumns, $aColWidths, $aAlign)
 
             $sString &= $sPrefix & $sCell
 
-            If $j < $iColumns - 1 And ($mBorder.HasBorder Or $mParam.BorderStyle == 2) Then
-                $sString &= $mBorder.Vertical
+            If $j < $iColumns - 1 And ($DTT_mBorder.HasBorder Or $DTT_mParam.BorderStyle == 2) Then
+                $sString &= $DTT_mBorder.Vertical
             EndIf
         Next
 
-        If $mBorder.HasBorder Or $mParam.BorderStyle == 2 Then
-            $sString &= $mBorder.VerticalRight
+        If $DTT_mBorder.HasBorder Or $DTT_mParam.BorderStyle == 2 Then
+            $sString &= $DTT_mBorder.VerticalRight
         EndIf
 
-        If $mParam.BorderStyle == 1 Then
+        If $DTT_mParam.BorderStyle == 1 Then
             $sString = StringTrimRight($sString, 1)
         EndIf
 
-        $sString &= $mConst.Delimiter
+        $sString &= $DTT_mConst.Delimiter
     Next
 
     Return $sString
 EndFunc
 
 Func __BuildBottomBorder($iColumns, $aColWidths)
-    Local $sString = $mBorder.EdgeBottomLeft
+    Local $sString = $DTT_mBorder.EdgeBottomLeft
 
     Local $sHorizontalChars
     For $j = 0 To $iColumns - 1
-        $sHorizontalChars = _StringRepeat($mBorder.BottomHorizontal, $aColWidths[$j] + 2)
+        $sHorizontalChars = _StringRepeat($DTT_mBorder.BottomHorizontal, $aColWidths[$j] + 2)
         If @error Then
             __Log('_StringRepeat() error')
             Return SetError(1)
         EndIf
         $sString &= $sHorizontalChars
 
-        $sString &= ($j < ($iColumns - 1)) ? $mBorder.BottomCross : $mBorder.EdgeBottomRight
+        $sString &= ($j < ($iColumns - 1)) ? $DTT_mBorder.BottomCross : $DTT_mBorder.EdgeBottomRight
     Next
 
-    $sString &= $mConst.Delimiter
+    $sString &= $DTT_mConst.Delimiter
 
     Return $sString
 EndFunc
 
 Func __AlignCellText($sText, $iWidth, $sAlignChar)
     Switch $sAlignChar
-        Case $mParam.AlignRight
+        Case $DTT_mParam.AlignRight
             Return StringFormat('%' & $iWidth & 's', $sText)
 
-        Case $mParam.AlignCenter
+        Case $DTT_mParam.AlignCenter
             Local Const $iPad   = $iWidth - StringLen($sText)
             Local Const $iLeft  = Floor($iPad / 2)
             Local Const $iRight = $iPad - $iLeft
 
-            Local Const $sCell  = _StringRepeat($mConst.SingleWhitespace, $iLeft) & $sText & _StringRepeat($mConst.SingleWhitespace, $iRight)
+            Local Const $sCell  = _StringRepeat($DTT_mConst.SingleWhitespace, $iLeft) & $sText & _StringRepeat($DTT_mConst.SingleWhitespace, $iRight)
             If @error Then
                 __Log('_StringRepeat() error')
                 Return SetError(1)
@@ -500,7 +498,7 @@ Func __AlignCellText($sText, $iWidth, $sAlignChar)
 
             Return $sCell
 
-        Case Else ; $mParam.AlignLeft
+        Case Else ; $DTT_mParam.AlignLeft
             Return StringFormat('%-' & $iWidth & 's', $sText)
     EndSwitch
 EndFunc
