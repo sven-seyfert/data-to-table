@@ -2,7 +2,7 @@
 
 # Welcome to "data-to-table" 👋
 
-This library (UDF) allows you to transform input data, like strings or arrays, to a nice readable table output with different border styles. Output your data to console, file or GUI.
+This library (UDF) allows you to transform input data, like strings or arrays, to a nice readable table output with different border styles and aligned table cell content. Output your data to console, file or GUI.
 
 👉 Please check out the [upcoming features](#ideas--upcoming-features) section.
 
