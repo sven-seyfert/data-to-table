@@ -13,7 +13,7 @@ Global $DTT_mBorder[]
 ; #FUNCTION# ====================================================================================================================
 ; Name...........: _DataToTable
 ; Description....: Transforms a string or array to a formatted table with alignment and different border styles.
-; Syntax.........: _DataToTable( $vData [, $iBorderStyle = 3 [, $sSeparator = @TAB [, $sColumnAlign = '']]] )
+; Syntax.........: _DataToTable( $vData [, $iBorderStyle = 4 [, $sSeparator = @TAB [, $sColumnAlign = '']]] )
 ; Parameters.....: $vData        - The input string or array containing data values.
 ;                  $iBorderStyle - [optional] Border style (default is 4).
 ;                                             1 = no-border
@@ -47,7 +47,7 @@ Global $DTT_mBorder[]
 ;                          ['PowerShell',  '13.5',           'Low to Moderate', 'Task Automation, DevOps, System Admin'   ], _
 ;                          ['AutoIt',      '0.5',            'Low',             'Windows GUI Automation, Scripting'       ] _
 ;                      ]
-;                  ConsoleWrite(_DataToTable($aData, 3, @TAB, 'L, R, C, R'))
+;                  ConsoleWrite(_DataToTable($aData, 4, @TAB, 'L, R, C, R'))
 ; ===============================================================================================================================
 Func _DataToTable($vData, $iBorderStyle = 3, $sSeparator = @TAB, $sColumnAlign = '')
     __SetConstants()
