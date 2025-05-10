@@ -87,6 +87,28 @@ AutoIt                0.5       Low             Windows GUI Automation, Scriptin
 ║ AutoIt     │            0.5 │       Low       │       Windows GUI Automation, Scripting ║
 ╚════════════╧════════════════╧═════════════════╧═════════════════════════════════════════╝
 
+==> Border style: "9 = rounded-corner-outside-border-only-no-header"
+
+╭─────────────────────────────────────────────────────────────────────────────────────────╮
+│ Language     Popularity (%)     Job Demand                                  Typical Use │
+│ JavaScript             62.3      Very High            Web Development, Frontend/Backend │
+│ C#                     27.1        High         Game Development, Windows Apps, Web Dev │
+│ Go                     13.8       Growing            Cloud Services, System Programming │
+│ PowerShell             13.5   Low to Moderate     Task Automation, DevOps, System Admin │
+│ AutoIt                  0.5         Low               Windows GUI Automation, Scripting │
+╰─────────────────────────────────────────────────────────────────────────────────────────╯
+
+==> Border style: "10 = double-outside-border-only-no-header"
+
+╔═════════════════════════════════════════════════════════════════════════════════════════╗
+║ Language     Popularity (%)     Job Demand                                  Typical Use ║
+║ JavaScript             62.3      Very High            Web Development, Frontend/Backend ║
+║ C#                     27.1        High         Game Development, Windows Apps, Web Dev ║
+║ Go                     13.8       Growing            Cloud Services, System Programming ║
+║ PowerShell             13.5   Low to Moderate     Task Automation, DevOps, System Admin ║
+║ AutoIt                  0.5         Low               Windows GUI Automation, Scripting ║
+╚═════════════════════════════════════════════════════════════════════════════════════════╝
+
 --------------------------------------------------------------------------------
 
 other tests:
