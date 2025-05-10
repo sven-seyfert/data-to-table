@@ -63,7 +63,8 @@ Local Const $aData[][5] = _
 
 #### *to output result*
 
-🔥 The output result only looks good in case you use a monospace font in your file viewer/editor or in your GUI.<br>On console it should be default to have a monospace font, but the border visualization differs a bit from the file output result.
+> 🔥 The output result only looks good in case you use a monospace font in your file viewer/editor or in your GUI.<br>
+> On console it should be default to have a monospace font, but the border visualization differs a bit from the file output result.
 
 **Border style editor view (notepad.exe)**
 
@@ -195,8 +196,9 @@ Local Const $aData[][5] = _
 </details>
 <br>
 
-### Different approach compared to the original UDF (library)
+### Key aspects of the UDF (library)
 
+- 10 different border styles
 - highly abstracted library
 - enhanced error handling
 - usage of maps
