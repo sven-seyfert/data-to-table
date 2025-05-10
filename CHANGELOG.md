@@ -11,6 +11,23 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 
 ## [Unreleased]
 
+## [0.5.0] - 2025-05-10
+
+### Added
+
+- Demo to show output result on GUI. [47ed6eb](https://github.com/sven-seyfert/data-to-table/commit/47ed6ebca74a34f4afa4efab9ff2cc0de573d478)
+
+### Documented
+
+- Add logo image. [31f7cf4](https://github.com/sven-seyfert/data-to-table/commit/31f7cf4698e656a740087a23d088a9770207422b)
+- Update README.md file. [b9f9487](https://github.com/sven-seyfert/data-to-table/commit/b9f94876684d62257c7df0e4bce8dfabdda75896)
+- Add meta files for developing (no impact on the current code). [96a1ac0](https://github.com/sven-seyfert/data-to-table/commit/96a1ac0e5ffe2c3c467d72f9c8d42fcd613a249b)
+- Project version bump. [313ef08](https://github.com/sven-seyfert/data-to-table/commit/313ef084d4fa1e3c29c0aa57ae698a1be2e7a8dc)
+
+### Styled
+
+- Tiny adjustments in function header text. [1514a32](https://github.com/sven-seyfert/data-to-table/commit/1514a32fef1d6c15c441095bc79d31709566b21c)
+
 ## [0.4.0] - 2025-05-10
 
 ### Added
@@ -85,7 +102,8 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 
 - Small adjustments. [56c4368](https://github.com/sven-seyfert/data-to-table/commit/56c4368c70c0e2497e26d4152a3094e8bfaefde1)
 
-[Unreleased]: https://github.com/sven-seyfert/data-to-table/compare/v0.4.0...HEAD
+[Unreleased]: https://github.com/sven-seyfert/data-to-table/compare/v0.5.0...HEAD
+[0.5.0]: https://github.com/sven-seyfert/data-to-table/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/sven-seyfert/data-to-table/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/sven-seyfert/data-to-table/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/sven-seyfert/data-to-table/compare/v0.1.0...v0.2.0
