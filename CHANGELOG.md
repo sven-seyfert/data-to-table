@@ -11,6 +11,27 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 
 ## [Unreleased]
 
+## [0.4.0] - 2025-05-10
+
+### Added
+
+- Two border style options. [b0dd051](https://github.com/sven-seyfert/data-to-table/commit/b0dd0518fdfba237719a137a4b14ef9acc40e66f)
+
+### Changed
+
+- Add more usaga examples (border style variant 9 + 10). [d0fc566](https://github.com/sven-seyfert/data-to-table/commit/d0fc56683c0442b306d5c12baab616dab0df7a45)
+- Prefix global map variables to avoid redeclaring these variables by users accidentally. [2bdda1b](https://github.com/sven-seyfert/data-to-table/commit/2bdda1beea75c993801c9bbf5b6804bd07561718)
+
+### Documented
+
+- Project version bump. [6f22b79](https://github.com/sven-seyfert/data-to-table/commit/6f22b7963d37181ad29c4a36cfda1b563f108b62)
+- Update output-result.txt file. [5f724e9](https://github.com/sven-seyfert/data-to-table/commit/5f724e900fc982dbfa88b296422e34c9a21f315b)
+- Update README.md file. [107ed6a](https://github.com/sven-seyfert/data-to-table/commit/107ed6a1b2ffe42c776c2e465629fef0345c10a9)
+
+### 🙏 Thanks to the contributors
+
+@WildByDesign
+
 ## [0.3.0] - 2025-05-09
 
 ### Added
@@ -64,7 +85,8 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 
 - Small adjustments. [56c4368](https://github.com/sven-seyfert/data-to-table/commit/56c4368c70c0e2497e26d4152a3094e8bfaefde1)
 
-[Unreleased]: https://github.com/sven-seyfert/data-to-table/compare/v0.3.0...HEAD
+[Unreleased]: https://github.com/sven-seyfert/data-to-table/compare/v0.4.0...HEAD
+[0.4.0]: https://github.com/sven-seyfert/data-to-table/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/sven-seyfert/data-to-table/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/sven-seyfert/data-to-table/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/sven-seyfert/data-to-table/releases/tag/v0.1.0
