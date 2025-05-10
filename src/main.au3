@@ -20,6 +20,7 @@ _Main()
 Func _Main()
     ;~ _DemoStringDataToTable()
     _DemoArrayDataToTable()
+    ;~ _DemoStringDataToTableOnGui()
 EndFunc
 
 Func _DemoStringDataToTable()
@@ -141,6 +142,30 @@ Func _DemoArrayDataToTable()
     $sOut &= StringFormat('\n==> With "," as separator (loose data because comma separated content):\n\n%s', $sResult)
 
     _ShowResult($sOut)
+EndFunc
+
+Func _DemoStringDataToTableOnGui()
+    Local Const $sData = _
+        'Language	Popularity (%)	Job Demand	Typical Use' & @CRLF & _
+        'JavaScript	62.3	Very High	Web Development, Frontend/Backend' & @CRLF & _
+        'C#	27.1	High	Game Development, Windows Apps, Web Dev' & @CRLF & _
+        'Go	13.8	Growing	Cloud Services, System Programming' & @CRLF & _
+        'PowerShell	13.5	Low to Moderate	Task Automation, DevOps, System Admin' & @CRLF & _
+        'AutoIt	0.5	Low	Windows GUI Automation, Scripting'
+
+    Local Const $sResult = _DataToTable($sData, 8, @TAB, 'L, R, C, R')
+    If @error Then
+        _ShowError()
+    EndIf
+
+    GUICreate('data-to-table', 580, 200)
+    Local Const $cIdText = GUICtrlCreateLabel('', 15, 15, 550, 170)
+    GUICtrlSetFont($cIdText, Default, Default, Default, 'Consolas')
+    GUISetState()
+
+    GUICtrlSetData($cIdText, $sResult)
+
+    Sleep(5000)
 EndFunc
 
 Func _ShowError($sMessage = 'at _DataToTable()')
