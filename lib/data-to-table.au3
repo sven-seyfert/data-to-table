@@ -24,6 +24,8 @@ Global $mBorder[]
 ;                                             6 = double-outter-border-no-header
 ;                                             7 = all-double-border-and-header
 ;                                             8 = double-outter-border-and-header-with-single-inner-border
+;                                             9 = rounded-corner-outside-border-only-no-header
+;                                             10 = double-outside-border-only-no-header
 ;                  $sSeparator   - [optional] Separator used in the input string (default is @TAB).
 ;                  $sColumnAlign - [optional] Alignment for each column (default is '' (left-aligned)).
 ;                                             Accepted characters are 'C, L, R' (otherwise fallback '' hits).
@@ -141,34 +143,34 @@ Func __SetConstants()
 EndFunc
 
 Func __SetBorderStyle()
-    Local Const $aBorderStyle[][9] = _
+    Local Const $aBorderStyle[][11] = _
         [ _
-            ['',                     1,     2,     3,     4,     5,     6,     7,     8 ], _
-            ['EdgeTopLeft',         '',    '┌',   '┌',   '┌',   '╔',   '╔',   '╔',   '╔'], _
-            ['EdgeTopRight',        '',    '┐',   '┐',   '┐',   '╗',   '╗',   '╗',   '╗'], _
-            ['EdgeBottomLeft',      '',    '└',   '└',   '└',   '╚',   '╚',   '╚',   '╚'], _
-            ['EdgeBottomRight',     '',    '┘',   '┘',   '┘',   '╝',   '╝',   '╝',   '╝'], _
+            ['',                     1,     2,     3,     4,     5,     6,     7,     8,     9,     10 ], _
+            ['EdgeTopLeft',         '',    '┌',   '┌',   '┌',   '╔',   '╔',   '╔',   '╔',   '╭',   '╔'], _
+            ['EdgeTopRight',        '',    '┐',   '┐',   '┐',   '╗',   '╗',   '╗',   '╗',   '╮',   '╗'], _
+            ['EdgeBottomLeft',      '',    '└',   '└',   '└',   '╚',   '╚',   '╚',   '╚',   '╰',   '╚'], _
+            ['EdgeBottomRight',     '',    '┘',   '┘',   '┘',   '╝',   '╝',   '╝',   '╝',   '╯',   '╝'], _
             _
-            ['TopCross',            '',    '┬',   '┬',   '┬',   '┬',   '╤',   '╦',   '╤'], _
-            ['HeaderCross',         '',    '┼',   '┼',   '┼',   '┼',   '┼',   '╬',   '┼'], _
-            ['BottomCross',         '',    '┴',   '┴',   '┴',   '┴',   '╧',   '╩',   '╧'], _
+            ['TopCross',            '',    '┬',   '┬',   '┬',   '┬',   '╤',   '╦',   '╤',   '─',   '═'], _
+            ['HeaderCross',         '',    '┼',   '┼',   '┼',   '┼',   '┼',   '╬',   '┼',   ' ',   ' '], _
+            ['BottomCross',         '',    '┴',   '┴',   '┴',   '┴',   '╧',   '╩',   '╧',   '─',   '═'], _
             _
-            ['TopHorizontal',       '',    '─',   '─',   '─',   '─',   '═',   '═',   '═'], _
-            ['HeaderHorizontal',    '',    '─',   '─',   '─',   '─',   '─',   '═',   '─'], _
-            ['BottomHorizontal',    '',    '─',   '─',   '─',   '─',   '═',   '═',   '═'], _
+            ['TopHorizontal',       '',    '─',   '─',   '─',   '─',   '═',   '═',   '═',   '─',   '═'], _
+            ['HeaderHorizontal',    '',    '─',   '─',   '─',   '─',   '─',   '═',   '─',   ' ',   ' '], _
+            ['BottomHorizontal',    '',    '─',   '─',   '─',   '─',   '═',   '═',   '═',   '─',   '═'], _
             _
-            ['HeaderVerticalLeft',  '',    '',    '│',   '│',   '│',   '│',   '║',   '║'], _
-            ['HeaderSeparator',     '',    '│',   '│',   '│',   '│',   '│',   '║',   '│'], _
-            ['HeaderVerticalRight', '',    '',    '│',   '│',   '│',   '│',   '║',   '║'], _
-            ['HeaderLeft',          '',    '',    '├',   '├',   '├',   '├',   '╠',   '╟'], _
-            ['HeaderRight',         '',    '',    '┤',   '┤',   '┤',   '┤',   '╣',   '╢'], _
+            ['HeaderVerticalLeft',  '',    '',    '│',   '│',   '│',   '│',   '║',   '║',   '│',   '║'], _
+            ['HeaderSeparator',     '',    '│',   '│',   '│',   '│',   '│',   '║',   '│',   ' ',   ' '], _
+            ['HeaderVerticalRight', '',    '',    '│',   '│',   '│',   '│',   '║',   '║',   '│',   '║'], _
+            ['HeaderLeft',          '',    '',    '├',   '│',   '├',   '├',   '╠',   '╟',   '│',   '║'], _
+            ['HeaderRight',         '',    '',    '┤',   '│',   '┤',   '┤',   '╣',   '╢',   '│',   '║'], _
             _
-            ['VerticalLeft',        '',    '',    '│',   '│',   '│',   '║',   '║',   '║'], _
-            ['Vertical',            '',    '│',   '│',   '│',   '│',   '│',   '║',   '│'], _
-            ['VerticalRight',       '',    '',    '│',   '│',   '│',   '║',   '║',   '║'], _
+            ['VerticalLeft',        '',    '',    '│',   '│',   '│',   '║',   '║',   '║',   '│',   '║'], _
+            ['Vertical',            '',    '│',   '│',   '│',   '│',   '│',   '║',   '│',   ' ',   ' '], _
+            ['VerticalRight',       '',    '',    '│',   '│',   '│',   '║',   '║',   '║',   '│',   '║'], _
             _
-            ['HasBorder',           '',    '',    'x',   'x',   'x',   'x',   'x',   'x'], _
-            ['HasHeaderBorder',     '',    'x',   '',    'x',   'x',   '',    'x',   'x'] _
+            ['HasBorder',           '',    '',    'x',   'x',   'x',   'x',   'x',   'x',   'x',   'x'], _
+            ['HasHeaderBorder',     '',    'x',   '',    'x',   'x',   '',    'x',   'x',   '',   ''] _
         ]
 
     $mBorder.EdgeTopLeft         = $aBorderStyle[1][$mParam.BorderStyle]
@@ -203,7 +205,7 @@ Func __ConfigureParameters($iBorderStyle, $sSeparator, $sColumnAlign)
     $mParam.Separator   = $sSeparator
     $mParam.ColumnAlign = StringUpper($sColumnAlign)
 
-    Local Const $iMaxBorderStyles    = 8
+    Local Const $iMaxBorderStyles    = 10
     Local Const $iDefaultBorderStyle = 4
 
     If Not IsInt($mParam.BorderStyle) Or $mParam.BorderStyle < 1 Or $mParam.BorderStyle > $iMaxBorderStyles Then
