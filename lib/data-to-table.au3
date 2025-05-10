@@ -1,5 +1,5 @@
 ; Copyright © Sven Seyfert (SOLVE-SMART)
-; Version v0.4.0 - 2025-05-10
+; Version v0.5.0 - 2025-05-10
 ; Distributed under the MIT License
 
 #include-once
