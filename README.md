@@ -61,15 +61,12 @@ Local Const $aData[][5] = _
     ]
 ```
 
-#### *to output result*
+#### *to output result (border style and alignment)*
 
-> 🔥 The output result only looks good in case you use a monospace font in your file viewer/editor or in your GUI.<br>
-> On console it should be default to have a monospace font, but the border visualization differs a bit from the file output result.
-
-**Border style editor view (notepad.exe)**
+**1. File view**
 
 <details>
-  <summary>👀 open by click</summary>
+  <summary>👀 OPEN ME</summary>
 
 ![1-4](assets/images/border-styles-1-to-5.jpg)
 ![5-8](assets/images/border-styles-6-to-10.jpg)
@@ -77,10 +74,10 @@ Local Const $aData[][5] = _
 </details>
 <br>
 
-**Border style markdown view**
+**2. Markdown view**
 
 <details>
-  <summary>👀 open by click</summary>
+  <summary>👀 OPEN ME</summary>
 
 ==> Border style: "1 = no-border"
 
@@ -194,6 +191,9 @@ Local Const $aData[][5] = _
     ╚═════════════════════════════════════════════════════════════════════════════════════════╝
 
 </details>
+
+> 💡 Please be aware: The output result only looks good in case you use a monospace font in your file viewer/editor or in your GUI.<br>
+> On console it should be default to have a monospace font, but the border visualization differs a bit from the file output result.
 
 ### Key aspects of the UDF (library)
 
