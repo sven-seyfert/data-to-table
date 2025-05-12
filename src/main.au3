@@ -18,33 +18,15 @@
 _Main()
 
 Func _Main()
-    ;~ _DemoStringDataToTable()
-    _DemoArrayDataToTable()
-    ;~ _DemoStringDataToTableOnGui()
-EndFunc
+    ;~ Local Const $sInputDataString = _
+    ;~     'Language	Popularity (%)	Job Demand	Typical Use' & @CRLF & _
+    ;~     'JavaScript	62.3	Very High	Web Development, Frontend/Backend' & @CRLF & _
+    ;~     'C#	27.1	High	Game Development, Windows Apps, Web Dev' & @CRLF & _
+    ;~     'Go	13.8	Growing	Cloud Services, System Programming' & @CRLF & _
+    ;~     'PowerShell	13.5	Low to Moderate	Task Automation, DevOps, System Admin' & @CRLF & _
+    ;~     'AutoIt	0.5	Low	Windows GUI Automation, Scripting'
 
-Func _DemoStringDataToTable()
-    Local Const $sData = _
-        'Language	Popularity (%)	Job Demand	Typical Use' & @CRLF & _
-        'JavaScript	62.3	Very High	Web Development, Frontend/Backend' & @CRLF & _
-        'C#	27.1	High	Game Development, Windows Apps, Web Dev' & @CRLF & _
-        'Go	13.8	Growing	Cloud Services, System Programming' & @CRLF & _
-        'PowerShell	13.5	Low to Moderate	Task Automation, DevOps, System Admin' & @CRLF & _
-        'AutoIt	0.5	Low	Windows GUI Automation, Scripting'
-
-    Local $sResult, $sOut
-
-    $sResult = _DataToTable($sData, 4, @TAB, 'L, R, C, R')
-    If @error Then
-        _ShowError()
-    EndIf
-    $sOut &= StringFormat('==> Border style 3:\n\n%s', $sResult)
-
-    _ShowResult($sOut)
-EndFunc
-
-Func _DemoArrayDataToTable()
-    Local Const $aData[][5] = _
+    Local Const $aInputDataArray[][5] = _
         [ _
             ['Language',    'Popularity (%)', 'Job Demand',      'Typical Use'                             ], _
             ['JavaScript',  '62.3',           'Very High',       'Web Development, Frontend/Backend'       ], _
@@ -54,6 +36,24 @@ Func _DemoArrayDataToTable()
             ['AutoIt',      '0.5',            'Low',             'Windows GUI Automation, Scripting'       ] _
         ]
 
+    ;~ _DemoStringDataToTable($sInputDataString)
+    _DemoArrayDataToTable($aInputDataArray)
+    ;~ _DemoStringDataToTableOnGui($sInputDataString)
+
+    ;~ _SomeOtherTests($aInputDataArray)
+EndFunc
+
+Func _DemoStringDataToTable($sData)
+    Local Const $sResult = _DataToTable($sData, 4, @TAB, 'L, R, C, R')
+    If @error Then
+        _ShowError()
+    EndIf
+    Local Const $sOut = StringFormat('==> Border style 3:\n\n%s', $sResult)
+
+    _ShowResult($sOut)
+EndFunc
+
+Func _DemoArrayDataToTable($aData)
     Local $sResult, $sOut
 
     ;~ 1 = no-border
@@ -126,33 +126,10 @@ Func _DemoArrayDataToTable()
     EndIf
     $sOut &= StringFormat('\n==> Border style: "10 = double-outside-border-only-no-header"\n\n%s', $sResult)
 
-    ; tests (more to be defined)
-    $sOut &= StringFormat('\n%s\n\nother tests:\n', _StringRepeat('-', 80))
-
-    $sResult = _DataToTable($aData, 'bla', @TAB, 'L, R, C, R')
-    If @error Then
-        _ShowError()
-    EndIf
-    $sOut &= StringFormat('\n==> With invalid border style (back to default):\n\n%s', $sResult)
-
-    $sResult = _DataToTable($aData, 2, ',', 'L, R, C, R')
-    If @error Then
-        _ShowError()
-    EndIf
-    $sOut &= StringFormat('\n==> With "," as separator (loose data because comma separated content):\n\n%s', $sResult)
-
     _ShowResult($sOut)
 EndFunc
 
-Func _DemoStringDataToTableOnGui()
-    Local Const $sData = _
-        'Language	Popularity (%)	Job Demand	Typical Use' & @CRLF & _
-        'JavaScript	62.3	Very High	Web Development, Frontend/Backend' & @CRLF & _
-        'C#	27.1	High	Game Development, Windows Apps, Web Dev' & @CRLF & _
-        'Go	13.8	Growing	Cloud Services, System Programming' & @CRLF & _
-        'PowerShell	13.5	Low to Moderate	Task Automation, DevOps, System Admin' & @CRLF & _
-        'AutoIt	0.5	Low	Windows GUI Automation, Scripting'
-
+Func _DemoStringDataToTableOnGui($sData)
     Local Const $sResult = _DataToTable($sData, 8, @TAB, 'L, R, C, R')
     If @error Then
         _ShowError()
@@ -166,6 +143,26 @@ Func _DemoStringDataToTableOnGui()
     GUICtrlSetData($cIdText, $sResult)
 
     Sleep(5000)
+EndFunc
+
+Func _SomeOtherTests($aData)
+    Local $sResult, $sOut
+
+    ; fallback behavior
+    $sResult = _DataToTable($aData, 'bla', @TAB, 'L, R, C, R')
+    If @error Then
+        _ShowError()
+    EndIf
+    $sOut &= StringFormat('\n==> With invalid border style (back to default):\n\n%s', $sResult)
+
+    ; open issues - TOOD: fix that
+    $sResult = _DataToTable($aData, 2, ',', 'L, R, C, R')
+    If @error Then
+        _ShowError()
+    EndIf
+    $sOut &= StringFormat('\n==> With "," as separator (loose data because comma separated content):\n\n%s', $sResult)
+
+    _ShowResult($sOut)
 EndFunc
 
 Func _ShowError($sMessage = 'at _DataToTable()')

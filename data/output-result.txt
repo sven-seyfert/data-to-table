@@ -108,29 +108,3 @@ AutoIt                0.5       Low             Windows GUI Automation, Scriptin
 ║ PowerShell             13.5   Low to Moderate     Task Automation, DevOps, System Admin ║
 ║ AutoIt                  0.5         Low               Windows GUI Automation, Scripting ║
 ╚═════════════════════════════════════════════════════════════════════════════════════════╝
-
---------------------------------------------------------------------------------
-
-other tests:
-
-==> With invalid border style (back to default):
-
-┌────────────┬────────────────┬─────────────────┬─────────────────────────────────────────┐
-│ Language   │ Popularity (%) │   Job Demand    │                             Typical Use │
-├────────────┼────────────────┼─────────────────┼─────────────────────────────────────────┤
-│ JavaScript │           62.3 │    Very High    │       Web Development, Frontend/Backend │
-│ C#         │           27.1 │      High       │ Game Development, Windows Apps, Web Dev │
-│ Go         │           13.8 │     Growing     │      Cloud Services, System Programming │
-│ PowerShell │           13.5 │ Low to Moderate │   Task Automation, DevOps, System Admin │
-│ AutoIt     │            0.5 │       Low       │       Windows GUI Automation, Scripting │
-└────────────┴────────────────┴─────────────────┴─────────────────────────────────────────┘
-
-==> With "," as separator (loose data because comma separated content):
-
- Language   │ Popularity (%) │   Job Demand    │            Typical Use 
-────────────┼────────────────┼─────────────────┼────────────────────────
- JavaScript │           62.3 │    Very High    │        Web Development 
- C#         │           27.1 │      High       │       Game Development 
- Go         │           13.8 │     Growing     │         Cloud Services 
- PowerShell │           13.5 │ Low to Moderate │        Task Automation 
- AutoIt     │            0.5 │       Low       │ Windows GUI Automation 
