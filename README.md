@@ -191,6 +191,7 @@ Local Const $aData[][5] = _
     ╚═════════════════════════════════════════════════════════════════════════════════════════╝
 
 </details>
+<br>
 
 > 💡 Please be aware: The output result only looks good in case you use a monospace font in your file viewer/editor or in your GUI.<br>
 > On console it should be default to have a monospace font, but the border visualization differs a bit from the file output result.
