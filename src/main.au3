@@ -28,22 +28,22 @@ Func _Main()
 
     Local Const $aInputDataArray[][5] = _
         [ _
-            ['Language',    'Popularity (%)', 'Job Demand',      'Typical Use'                             ], _
-            ['JavaScript',  '62.3',           'Very High',       'Web Development, Frontend/Backend'       ], _
-            ['C#',          '27.1',           'High',            'Game Development, Windows Apps, Web Dev' ], _
-            ['Go',          '13.8',           'Growing',         'Cloud Services, System Programming'      ], _
-            ['PowerShell',  '13.5',           'Low to Moderate', 'Task Automation, DevOps, System Admin'   ], _
-            ['AutoIt',      '0.5',            'Low',             'Windows GUI Automation, Scripting'       ] _
+            ['Language',    'Popularity (%)', 'Job Demand',      'Typical Use'                            ], _
+            ['JavaScript',  '62.3',           'Very High',       'Web Development, Frontend/Backend'      ], _
+            ['C#',          '27.1',           'High',            'Game Development, Windows Apps, Web Dev'], _
+            ['Go',          '13.8',           'Growing',         'Cloud Services, System Programming'     ], _
+            ['PowerShell',  '13.5',           'Low to Moderate', 'Task Automation, DevOps, System Admin'  ], _
+            ['AutoIt',      '0.5',            'Low',             'Windows GUI Automation, Scripting'      ] _
         ]
 
-    ;~ _DemoStringDataToTable($sInputDataString)
-    _DemoArrayDataToTable($aInputDataArray)
-    ;~ _DemoStringDataToTableOnGui($sInputDataString)
+    ;~ _ExampleStringDataToTable($sInputDataString)
+    _ExampleArrayDataToTable($aInputDataArray)
+    ;~ _ExampleStringDataToTableToGui($sInputDataString)
 
     ;~ _SomeOtherTests($aInputDataArray)
 EndFunc
 
-Func _DemoStringDataToTable($sData)
+Func _ExampleStringDataToTable($sData)
     Local Const $sResult = _DataToTable($sData, 4, @TAB, 'L, R, C, R')
     If @error Then
         _ShowError()
@@ -53,7 +53,7 @@ Func _DemoStringDataToTable($sData)
     _ShowResult($sOut)
 EndFunc
 
-Func _DemoArrayDataToTable($aData)
+Func _ExampleArrayDataToTable($aData)
     Local $sResult, $sOut
 
     ;~ 1 = no-border
@@ -129,7 +129,7 @@ Func _DemoArrayDataToTable($aData)
     _ShowResult($sOut)
 EndFunc
 
-Func _DemoStringDataToTableOnGui($sData)
+Func _ExampleStringDataToTableToGui($sData)
     Local Const $sResult = _DataToTable($sData, 8, @TAB, 'L, R, C, R')
     If @error Then
         _ShowError()
