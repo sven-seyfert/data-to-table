@@ -13,7 +13,7 @@
 
 #include-once
 #include <File.au3>
-#include "../lib/data-to-table.au3"
+#include "../src/data-to-table.au3"
 
 _Main()
 
