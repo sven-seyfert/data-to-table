@@ -11,6 +11,12 @@ Go to [legend](#legend---types-of-changes) for further information about the typ
 
 ## [Unreleased]
 
+## Refactored
+
+- Changed file and folder structure for project
+- Removed prettier configuration file
+- Replaced package.json with plain text VERSION file
+
 ## [0.5.0] - 2025-05-10
 
 ### Added
